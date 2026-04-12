@@ -1,0 +1,131 @@
+{
+  "folders": [
+    {
+      "name": "AzureLocal Platform",
+      "path": "."
+    },
+    {
+      "name": "azurelocal.github.io",
+      "path": "../azurelocal.github.io"
+    },
+    {
+      "name": "azurelocal-avd",
+      "path": "../azurelocal-avd"
+    },
+    {
+      "name": "azurelocal-sofs-fslogix",
+      "path": "../azurelocal-sofs-fslogix"
+    },
+    {
+      "name": "azurelocal-loadtools",
+      "path": "../azurelocal-loadtools"
+    },
+    {
+      "name": "azurelocal-vm-conversion-toolkit",
+      "path": "../azurelocal-vm-conversion-toolkit"
+    },
+    {
+      "name": "azurelocal-toolkit",
+      "path": "../azurelocal-toolkit"
+    },
+    {
+      "name": "azurelocal-copilot",
+      "path": "../azurelocal-copilot"
+    },
+    {
+      "name": "azurelocal-training",
+      "path": "../azurelocal-training"
+    },
+    {
+      "name": "azurelocal-nutanix-migration",
+      "path": "../azurelocal-nutanix-migration"
+    },
+    {
+      "name": "azurelocal-ranger",
+      "path": "../azurelocal-ranger"
+    },
+    {
+      "name": "azurelocal-S2DCartographer",
+      "path": "../azurelocal-S2DCartographer"
+    },
+    {
+      "name": "azurelocal-surveyor",
+      "path": "../azurelocal-surveyor"
+    },
+    {
+      "name": "demo-repository",
+      "path": "../demo-repository"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/.docusaurus": true,
+      "**/build": true,
+      "**/site": true,
+      "**/.venv": true,
+      "**/__pycache__": true,
+      "**/.mkdocs-build": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/.docusaurus": true,
+      "**/build": true,
+      "**/site": true,
+      "**/.venv": true,
+      "**/__pycache__": true,
+      "**/.mkdocs-build": true,
+      "**/gh-pages": true
+    },
+    "files.associations": {
+      "*.mdx": "mdx",
+      ".azurelocal-platform.yml": "yaml",
+      ".yamllint.yml": "yaml",
+      "mkdocs.yml": "yaml",
+      "CODEOWNERS": "plaintext"
+    },
+    "[markdown]": {
+      "editor.formatOnSave": false,
+      "editor.wordWrap": "on"
+    },
+    "[powershell]": {
+      "editor.tabSize": 4,
+      "editor.insertSpaces": true
+    },
+    "[yaml]": {
+      "editor.tabSize": 2,
+      "editor.insertSpaces": true
+    },
+    "powershell.codeFormatting.preset": "OTBS",
+    "powershell.codeFormatting.useCorrectCasing": true,
+    "yaml.schemas": {
+      "https://json.schemastore.org/github-workflow.json": [
+        ".github/workflows/*.yml",
+        ".github/workflows/*.yaml"
+      ],
+      "https://squidfunk.github.io/mkdocs-material/schema.json": "mkdocs.yml"
+    },
+    "azureTerraform.checkTerraformCmd": false,
+    "git.openRepositoryInParentFolders": "always"
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-vscode.powershell",
+      "davidanson.vscode-markdownlint",
+      "yzhang.markdown-all-in-one",
+      "unifiedjs.vscode-mdx",
+      "redhat.vscode-yaml",
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "tamasfe.even-better-toml",
+      "bierner.markdown-mermaid",
+      "ms-python.python",
+      "ms-azuretools.vscode-bicep",
+      "hashicorp.terraform",
+      "github.vscode-github-actions",
+      "github.vscode-pull-request-github",
+      "eamodio.gitlens",
+      "errata-ai.vale-server"
+    ]
+  }
+}
