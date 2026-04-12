@@ -4,6 +4,13 @@ All notable changes to `AzureLocal/platform` are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.0](https://github.com/AzureLocal/platform/compare/azurelocal-platform-v0.0.2...azurelocal-platform-v0.1.0) (2026-04-12)
+
+
+### Features
+
+* **standards:** Seed standards/ from site + add STANDARDS.md stub (Phase 1) ([#4](https://github.com/AzureLocal/platform/issues/4)) ([79a03a2](https://github.com/AzureLocal/platform/commit/79a03a219fc3f5faf3c29b22e74edfb88b606072))
+
 ## [0.0.2](https://github.com/AzureLocal/platform/compare/azurelocal-platform-v0.0.1...azurelocal-platform-v0.0.2) (2026-04-12)
 
 
