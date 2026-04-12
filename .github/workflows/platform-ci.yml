@@ -24,6 +24,7 @@ jobs:
             !site/**
             !node_modules/**
             !.venv/**
+            !CHANGELOG.md
 
   yaml-lint:
     name: YAML lint
