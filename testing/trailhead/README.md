@@ -4,7 +4,7 @@ Live-cluster validation framework. Structured cycles of "bring a tool to a real 
 
 ## Structure
 
-```
+```text
 trailhead/
 ├── templates/   — cycle plan, field testing, evidence capture
 ├── scripts/     — cycle runner, evidence capture, run comparator

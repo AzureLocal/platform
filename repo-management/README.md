@@ -4,7 +4,7 @@ Centralized templates and automation for managing the AzureLocal organization's 
 
 ## Structure
 
-```
+```text
 repo-management/
 ├── templates/       — canonical content for each repo's /repo-management folder
 └── org-scripts/     — scripts that act on the entire org (audit, sync, bootstrap)

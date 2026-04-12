@@ -204,7 +204,7 @@ jobs:
 
 ### PS module repo (like Ranger or S2DCartographer)
 
-```
+```text
 .github/workflows/
 ├── ci.yml                  # reusable-ps-module-ci
 ├── maproom.yml             # reusable-maproom-run
@@ -216,7 +216,7 @@ jobs:
 
 ### TS web app repo (like Surveyor)
 
-```
+```text
 .github/workflows/
 ├── ci.yml                  # reusable-ts-web-ci
 ├── release-please.yml      # reusable-release-please (from .github)
@@ -227,7 +227,7 @@ jobs:
 
 ### IaC solution repo (like AVD, SOFS, AKS)
 
-```
+```text
 .github/workflows/
 ├── validate-iac.yml        # reusable-iac-validate
 ├── deploy-docs.yml         # reusable-mkdocs-deploy

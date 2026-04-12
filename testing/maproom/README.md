@@ -4,7 +4,7 @@ Offline, fixture-based testing framework for AzureLocal repos.
 
 ## Structure
 
-```
+```text
 maproom/
 ├── framework/      — AzureLocal.Maproom PS module: classes, Public, Private
 ├── generators/     — IIC-compliant synthetic data generators
