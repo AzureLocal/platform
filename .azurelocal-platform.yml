@@ -1,0 +1,20 @@
+# AzureLocal platform self-descriptor
+# Every AzureLocal repo carries this file at its root. It declares the
+# repo's platform version, repo type, and which platform features it
+# adopts. Consumed by Invoke-RepoAudit.ps1 and reusable-drift-check.yml.
+#
+# Schema: https://AzureLocal.github.io/platform/reference/platform-metadata/
+
+platformVersion: 1
+repoType: platform          # this IS the platform repo
+
+adopts:
+  standards: true
+  reusableWorkflows:
+    - release-please        # from .github
+    - validate-structure    # from .github
+    - add-to-project        # from .github
+  maproom: false            # platform authors MAPROOM, does not adopt it
+  trailhead: false          # platform authors TRAILHEAD, does not adopt it
+
+lastAudited: 2026-04-12

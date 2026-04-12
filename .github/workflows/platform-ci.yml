@@ -1,0 +1,118 @@
+name: Platform CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  markdownlint:
+    name: Markdown lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DavidAnson/markdownlint-cli2-action@v17
+        with:
+          config: .markdownlint.json
+          globs: |
+            **/*.md
+            !site/**
+            !node_modules/**
+            !.venv/**
+
+  yaml-lint:
+    name: YAML lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install yamllint
+        run: pip install yamllint
+
+      - name: Run yamllint
+        run: |
+          yamllint -d '{extends: default, rules: {line-length: disable, document-start: disable, truthy: {allowed-values: ["true", "false", "on"]}, indentation: {spaces: 2, indent-sequences: consistent}, comments: {min-spaces-from-content: 1}, comments-indentation: disable}}' \
+            .github/workflows \
+            mkdocs.yml \
+            .azurelocal-platform.yml
+
+  mkdocs-build:
+    name: MkDocs build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-docs.txt
+
+      - name: Install docs dependencies
+        run: pip install -r requirements-docs.txt
+
+      - name: Build MkDocs site (strict)
+        run: mkdocs build --strict --site-dir site
+
+      - name: Upload site artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mkdocs-site
+          path: site/
+          retention-days: 7
+
+  link-check:
+    name: Link check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --exclude-path node_modules
+            --exclude-path site
+            --exclude-path .venv
+            --accept 200,204,206,403,429
+            --max-retries 2
+            './**/*.md'
+          fail: false
+
+  pester:
+    name: Pester (modules)
+    runs-on: ubuntu-latest
+    if: ${{ hashFiles('modules/**/*.psd1') != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Pester
+        shell: pwsh
+        run: Install-Module Pester -MinimumVersion 5.6.0 -Force -Scope CurrentUser
+
+      - name: Run Pester tests
+        shell: pwsh
+        run: |
+          $config = New-PesterConfiguration
+          $config.Run.Path = './modules'
+          $config.Output.Verbosity = 'Detailed'
+          Invoke-Pester -Configuration $config
+
+  structure:
+    name: Structure self-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Test-PlatformStructure.ps1
+        shell: pwsh
+        run: |
+          if (Test-Path ./scripts/Test-PlatformStructure.ps1) {
+            ./scripts/Test-PlatformStructure.ps1
+          } else {
+            Write-Host "Test-PlatformStructure.ps1 not yet implemented — skipping"
+          }

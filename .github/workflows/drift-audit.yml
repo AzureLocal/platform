@@ -1,0 +1,39 @@
+name: Drift Audit
+
+# Monthly scheduled audit of every AzureLocal repo against canonical
+# standards. Implementation lands in Phase 4 — this stub exists so the
+# schedule and entry point are declared from day one.
+
+on:
+  schedule:
+    # 09:00 UTC on the 1st of every month
+    - cron: '0 9 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Placeholder — full implementation in Phase 4
+        shell: pwsh
+        run: |
+          Write-Host '============================================================='
+          Write-Host '  Drift Audit — placeholder                                  '
+          Write-Host '  Full implementation scheduled for Phase 4 of the platform  '
+          Write-Host '  rollout. Once `repo-management/org-scripts/Invoke-RepoAudit.ps1`'
+          Write-Host '  ships, this workflow runs it and files a `drift-report`    '
+          Write-Host '  issue on platform with the results.                        '
+          Write-Host '============================================================='
+
+      - name: TODO — Run Invoke-RepoAudit.ps1 (Phase 4)
+        if: false
+        shell: pwsh
+        run: |
+          Import-Module ./modules/powershell/AzureLocal.Common/AzureLocal.Common.psd1
+          ./repo-management/org-scripts/Invoke-RepoAudit.ps1 -Org AzureLocal -EmitIssue

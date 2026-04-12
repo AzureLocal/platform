@@ -1,0 +1,7 @@
+# AzureLocal canonical CODEOWNERS
+# Single maintainer today. This file is the canonical copy distributed to
+# every AzureLocal repo via Sync-CommonFiles.ps1 (Phase 4).
+#
+# See https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-security/managing-repository-settings/about-code-owners
+
+* @kristopherjturner

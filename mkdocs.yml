@@ -1,0 +1,198 @@
+site_name: AzureLocal Platform
+site_url: https://AzureLocal.github.io/platform/
+site_description: Centralized standards, reusable workflows, test frameworks, and scaffolding for the AzureLocal organization.
+site_author: Azure Local
+
+repo_name: AzureLocal/platform
+repo_url: https://github.com/AzureLocal/platform
+edit_uri: edit/main/docs/
+
+copyright: Copyright &copy; 2026 Azure Local — MIT License
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - content.action.edit
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github
+  font:
+    text: Inter
+    code: JetBrains Mono
+
+plugins:
+  - search
+  - include-markdown
+  - mermaid2
+  - git-revision-date-localized:
+      type: date
+      enable_creation_date: true
+      fallback_to_build_date: true
+  - minify:
+      minify_html: true
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - tables
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid_custom
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/AzureLocal
+      name: AzureLocal on GitHub
+    - icon: fontawesome/solid/globe
+      link: https://azurelocal.cloud
+      name: azurelocal.cloud
+
+nav:
+  - Home: index.md
+  - Getting started:
+      - getting-started/index.md
+      - What is platform: getting-started/what-is-platform.md
+      - Why platform exists: getting-started/why-platform-exists.md
+      - Architecture overview: getting-started/architecture-overview.md
+      - Glossary: getting-started/glossary.md
+      - Quick links: getting-started/quick-links.md
+  - Onboarding:
+      - onboarding/index.md
+      - Adopt from an existing repo: onboarding/adopt-from-existing-repo.md
+      - Create a new repo: onboarding/create-new-repo.md
+      - Migration checklist: onboarding/migration-checklist.md
+      - Rollback: onboarding/rollback.md
+  - Standards:
+      - standards/index.md
+      - Consuming: standards/consuming.md
+      - Contributing: standards/contributing.md
+      - Propagation: standards/propagation.md
+      - Authoring guide: standards/authoring-guide.md
+  - Reusable workflows:
+      - reusable-workflows/index.md
+      - Split rule: reusable-workflows/split-rule.md
+      - Versioning: reusable-workflows/versioning.md
+      - Consumer patterns: reusable-workflows/consumer-patterns.md
+      - ps-module-ci: reusable-workflows/ps-module-ci.md
+      - ts-web-ci: reusable-workflows/ts-web-ci.md
+      - iac-validate: reusable-workflows/iac-validate.md
+      - mkdocs-deploy: reusable-workflows/mkdocs-deploy.md
+      - maproom-run: reusable-workflows/maproom-run.md
+      - drift-check: reusable-workflows/drift-check.md
+  - MAPROOM:
+      - maproom/index.md
+      - Overview: maproom/overview.md
+      - Framework architecture: maproom/framework-architecture.md
+      - IIC canon: maproom/iic-canon.md
+      - Authoring fixtures: maproom/authoring-fixtures.md
+      - Writing unit tests: maproom/writing-unit-tests.md
+      - Integration model: maproom/integration-model.md
+      - Extending the framework: maproom/extending-the-framework.md
+      - Troubleshooting: maproom/troubleshooting.md
+  - TRAILHEAD:
+      - trailhead/index.md
+      - Overview: trailhead/overview.md
+      - Cycle planning: trailhead/cycle-planning.md
+      - Evidence capture: trailhead/evidence-capture.md
+      - Safety checklist: trailhead/safety-checklist.md
+      - Post-run review: trailhead/post-run-review.md
+  - Repo management:
+      - repo-management/index.md
+      - Overview: repo-management/overview.md
+      - New-repo bootstrap: repo-management/new-repo-bootstrap.md
+      - Drift audit: repo-management/drift-audit.md
+      - Label sync: repo-management/label-sync.md
+      - Branch protection: repo-management/branch-protection.md
+      - Common file sync: repo-management/common-file-sync.md
+      - Emergency runbooks: repo-management/emergency-runbooks.md
+  - Templates:
+      - templates/index.md
+      - Overview: templates/overview.md
+      - ps-module: templates/ps-module.md
+      - ts-web-app: templates/ts-web-app.md
+      - iac-solution: templates/iac-solution.md
+      - migration-runbook: templates/migration-runbook.md
+      - training-site: templates/training-site.md
+      - Authoring a new variant: templates/authoring-new-variant.md
+  - Modules:
+      - modules/index.md
+      - AzureLocal.Common: modules/AzureLocal.Common.md
+  - Governance:
+      - governance/index.md
+      - ADR process: governance/adr-process.md
+      - Release cycle: governance/release-cycle.md
+      - Versioning: governance/versioning.md
+      - Breaking changes: governance/breaking-changes.md
+      - CODEOWNERS & reviewers: governance/codeowners-and-reviewers.md
+  - Reference:
+      - reference/index.md
+      - Folder structure: reference/folder-structure.md
+      - File manifest: reference/file-manifest.md
+      - Workflow matrix: reference/workflow-matrix.md
+      - Env & secrets: reference/env-secrets.md
+      - Troubleshooting: reference/troubleshooting.md
+      - FAQ: reference/faq.md
+  - Contributing:
+      - contributing/index.md
+      - Local setup: contributing/local-setup.md
+      - PR workflow: contributing/pr-workflow.md
+      - Testing platform: contributing/testing-platform.md
+      - Release process: contributing/release-process.md
