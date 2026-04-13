@@ -36,6 +36,18 @@ Cycle outputs go into `tests/trailhead/logs/<date>/` in the product repo (never 
 
 TRAILHEAD touches live clusters. Always review [`docs/trailhead/safety-checklist.md`](../../docs/trailhead/safety-checklist.md) before running a cycle.
 
+## Scripts (v0.2.0)
+
+```text
+trailhead/
+└── scripts/
+    ├── TrailheadLog-Helpers.ps1   ← platform-canonical log helpers (Write-TH*, Close-THRun)
+    └── Start-TrailheadRun.ps1     ← parameterized run initializer (-ManifestPath, -IssueLabels)
+```
+
+Consumer repos dot-source `TrailheadLog-Helpers.ps1` from the platform location in CI,
+or keep a synchronized copy in their own `tests/trailhead/scripts/`.
+
 ## Documentation
 
 - [Overview](../../docs/trailhead/overview.md)
