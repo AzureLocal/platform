@@ -168,7 +168,6 @@ nav:
           - Evidence capture: trailhead/evidence-capture.md
           - Safety checklist: trailhead/safety-checklist.md
           - Post-run review: trailhead/post-run-review.md
-      - Future toolsets: testing/future-toolsets.md
       - Repo survey: testing/repo-survey.md
   - Operations:
       - Repo management:

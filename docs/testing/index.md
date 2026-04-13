@@ -15,7 +15,7 @@ title: Testing
 
 ## Future toolkits (v0.3.0+)
 
-See [Future toolsets](future-toolsets.md). MUSTER, COMPASS, LEDGER, PULSE, STORYBOARD, BLUEPRINT are all classified and deferred per ADR-0004.
+Tracked as GitHub issues on this repo: MUSTER ([#10](https://github.com/AzureLocal/platform/issues/10)), COMPASS ([#11](https://github.com/AzureLocal/platform/issues/11)), LEDGER ([#12](https://github.com/AzureLocal/platform/issues/12)), PULSE ([#13](https://github.com/AzureLocal/platform/issues/13)), STORYBOARD ([#14](https://github.com/AzureLocal/platform/issues/14)), BLUEPRINT ([#15](https://github.com/AzureLocal/platform/issues/15)), OUTPOST ([#16](https://github.com/AzureLocal/platform/issues/16)).
 
 ## Repo survey
 
@@ -33,3 +33,4 @@ The [Repo survey](repo-survey.md) grounds testing decisions in what the 11 sibli
 | Synthetic workload load profile | PULSE (v0.3.0) |
 | IaC pre-deploy template assertion | BLUEPRINT (v0.3.0) |
 | Repo conformance against platform standards | MUSTER (drift-audit today; standalone module v0.3.0+) |
+| Demo/training environment provisioning | OUTPOST (v0.3.0+) |
