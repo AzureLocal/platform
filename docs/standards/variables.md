@@ -416,6 +416,7 @@ Scans all repos for variable usage and produces a cross-repo inventory.
 ```
 
 **Outputs:**
+
 - `variable-inventory.csv` / `.json` — every variable path by repo and file
 - `variable-inventory-summary.txt` — counts per repo, unique paths
 
@@ -428,6 +429,7 @@ Finds shared variables across repos and detects naming collisions.
 ```
 
 **Outputs:**
+
 - `shared-key-paths.csv` — variable paths used in multiple repos
 - `leaf-collisions.csv` — same leaf name, different paths across repos
 - `canonical-mapping-template.csv` — template for mapping legacy → canonical
@@ -441,6 +443,7 @@ Classifies variables as canonical, legacy alias, or orphaned based on the mappin
 ```
 
 **Outputs:**
+
 - `canonical-mapping-template-classified.csv` — each path classified as `canonical_candidate`, `alias_candidate`, or `orphaned_candidate`
 - `classification-summary.txt`
 
