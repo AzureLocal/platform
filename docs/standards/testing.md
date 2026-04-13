@@ -13,9 +13,8 @@ description: "MAPROOM fixtures, TRAILHEAD scenarios, and IIC canon — how Azure
 
 Testing in AzureLocal is centralized. The frameworks, schemas, and canonical test data live in [`AzureLocal/platform/testing/`](https://github.com/AzureLocal/platform/tree/main/testing) and are consumed by every product repo. This standard defines **what each repo must test** and **which framework primitives it must use** — it does not re-describe the frameworks themselves (those have their own docs under [`docs/maproom/`](https://github.com/AzureLocal/platform/tree/main/docs/maproom) and [`docs/trailhead/`](https://github.com/AzureLocal/platform/tree/main/docs/trailhead) once Phase 2 ships).
 
-:::info[Phase status]
-Phase 1 (this document) establishes the **standard**. Phase 2 ships the **framework** (`AzureLocal.Maproom` PowerShell module, fixture + IIC schemas, TRAILHEAD harness). Until Phase 2 lands, repos continue to reference [`azurelocal-S2DCartographer/tests/maproom/`](https://github.com/AzureLocal/azurelocal-S2DCartographer/tree/main/tests/maproom) as the interim canonical implementation.
-:::
+!!! info "Phase status"
+    Phase 1 (this document) establishes the **standard**. Phase 2 ships the **framework** (`AzureLocal.Maproom` PowerShell module, fixture + IIC schemas, TRAILHEAD harness). Until Phase 2 lands, repos continue to reference [`azurelocal-S2DCartographer/tests/maproom/`](https://github.com/AzureLocal/azurelocal-S2DCartographer/tree/main/tests/maproom) as the interim canonical implementation.
 
 ---
 
@@ -31,9 +30,8 @@ Every test in an AzureLocal repo falls into exactly one of these classes. The cl
 | **scenario** (TRAILHEAD) | Scripted end-to-end walkthrough with pass/fail gates. User-journey shaped: "user does X, expects Y". | `tests/trailhead/` | TRAILHEAD harness (Phase 2) |
 | **drift-audit** | Assert a live environment still matches its MAPROOM fixture after time passes. Runs scheduled, not per-commit. | `tests/drift/` | `AzureLocal.Maproom` + scheduled workflow |
 
-:::warning[Classification under review]
-The five-class taxonomy above is the **current** rule. An open platform issue ([#3](https://github.com/AzureLocal/platform/issues/3)) is reviewing whether additional classes (compliance assertion, synthetic load, migration-inventory differ, repo conformance) should become first-class. Until that issue closes, treat anything outside the five classes as repo-local tooling — do not lift it into `platform/testing/` without ADR approval.
-:::
+!!! warning "Classification under review"
+    The five-class taxonomy above is the **current** rule. An open platform issue ([#3](https://github.com/AzureLocal/platform/issues/3)) is reviewing whether additional classes (compliance assertion, synthetic load, migration-inventory differ, repo conformance) should become first-class. Until that issue closes, treat anything outside the five classes as repo-local tooling — do not lift it into `platform/testing/` without ADR approval.
 
 ---
 
