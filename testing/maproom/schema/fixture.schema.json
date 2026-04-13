@@ -1,0 +1,161 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://azurelocal.github.io/platform/testing/maproom/schema/fixture.schema.json",
+  "title": "AzureLocal MAPROOM Fixture",
+  "description": "Schema for AzureLocal MAPROOM fixture files. 'infrastructure_type' is the discriminator for type-specific property sets. Reserved top-level sections (compliance, performance, user_journey, iac) must be present but are empty in v0.2.0; they will be populated by deferred toolsets (COMPASS, PULSE, STORYBOARD, BLUEPRINT) in v0.3.0.",
+  "type": "object",
+  "required": ["infrastructure_type", "_metadata"],
+  "properties": {
+    "infrastructure_type": {
+      "type": "string",
+      "description": "Discriminator that selects the type-specific property set for this fixture.",
+      "enum": [
+        "azure_local",
+        "avd_azure",
+        "avd_azure_local",
+        "sofs_azure_local",
+        "aks_azure_local",
+        "loadtools",
+        "vm_conversion",
+        "copilot"
+      ]
+    },
+    "_metadata": {
+      "type": "object",
+      "description": "Fixture-level metadata. Not part of the cluster shape — used for documentation and tooling.",
+      "required": ["fixture", "description"],
+      "properties": {
+        "fixture": {
+          "type": "string",
+          "description": "Short identifier for this fixture (matches filename without extension)."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the scenario this fixture represents."
+        },
+        "nodeCount": { "type": "integer", "minimum": 1 },
+        "totalRawCapacityBytes": { "type": "integer", "minimum": 0 },
+        "expectedReserveStatus": {
+          "type": "string",
+          "enum": ["Adequate", "Warning", "Critical"]
+        },
+        "capacityDisksPerNode": { "type": "integer", "minimum": 0 },
+        "capacityDiskSizeBytes": { "type": "integer", "minimum": 0 },
+        "cacheDisksPerNode": { "type": "integer", "minimum": 0 },
+        "expectedThinOvercommit": { "type": "boolean" },
+        "generatedAt": { "type": "string" },
+        "generatedBy": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "compliance": {
+      "type": "object",
+      "description": "Reserved for COMPASS policy assertions (v0.3.0). Must be an empty object in v0.2.0 fixtures.",
+      "maxProperties": 0
+    },
+    "performance": {
+      "type": "object",
+      "description": "Reserved for PULSE load-profile expectations (v0.3.0). Must be an empty object in v0.2.0 fixtures.",
+      "maxProperties": 0
+    },
+    "user_journey": {
+      "type": "object",
+      "description": "Reserved for STORYBOARD scenario expectations (v0.3.0). Must be an empty object in v0.2.0 fixtures.",
+      "maxProperties": 0
+    },
+    "iac": {
+      "type": "object",
+      "description": "Reserved for BLUEPRINT pre-deploy template assertions (v0.3.0). Must be an empty object in v0.2.0 fixtures.",
+      "maxProperties": 0
+    }
+  },
+  "if": {
+    "properties": {
+      "infrastructure_type": { "const": "azure_local" }
+    },
+    "required": ["infrastructure_type"]
+  },
+  "then": {
+    "properties": {
+      "clusterName": {
+        "type": "string",
+        "description": "Windows cluster name (short, not FQDN)."
+      },
+      "clusterFqdn": {
+        "type": "string",
+        "description": "Fully-qualified cluster name."
+      },
+      "nodeCount": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "nodes": {
+        "type": "array",
+        "items": { "type": "string" },
+        "minItems": 1,
+        "description": "List of node FQDNs or short names."
+      },
+      "storagePool": {
+        "type": "object",
+        "properties": {
+          "friendlyName": { "type": "string" },
+          "sizeBytes": { "type": "integer", "minimum": 0 },
+          "allocatedSizeBytes": { "type": "integer", "minimum": 0 },
+          "remainingSizeBytes": { "type": "integer", "minimum": 0 },
+          "healthStatus": { "type": "string" },
+          "operationalStatus": { "type": "string" },
+          "faultDomainAwarenessDefault": { "type": "string" },
+          "isReadOnly": { "type": "boolean" }
+        }
+      },
+      "physicalDisks": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["nodeName", "mediaType", "sizeBytes"],
+          "properties": {
+            "nodeName": { "type": "string" },
+            "friendlyName": { "type": "string" },
+            "model": { "type": "string" },
+            "serialNumber": { "type": "string" },
+            "mediaType": {
+              "type": "string",
+              "enum": ["NVMe", "SSD", "HDD"]
+            },
+            "busType": { "type": "string" },
+            "usage": { "type": "string" },
+            "role": { "type": "string" },
+            "sizeBytes": { "type": "integer", "minimum": 0 },
+            "healthStatus": { "type": "string" },
+            "operationalStatus": { "type": "string" },
+            "wear": { "type": ["integer", "null"] },
+            "temperature": { "type": ["integer", "null"] },
+            "powerOnHours": { "type": ["integer", "null"] },
+            "firmwareVersion": { "type": "string" },
+            "manufacturer": { "type": "string" }
+          }
+        }
+      },
+      "virtualDisks": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "friendlyName": { "type": "string" },
+            "sizeBytes": { "type": "integer", "minimum": 0 },
+            "footprintOnPoolBytes": { "type": "integer", "minimum": 0 },
+            "allocatedSizeBytes": { "type": "integer", "minimum": 0 },
+            "resiliencySettingName": { "type": "string" },
+            "numberOfDataCopies": { "type": "integer" },
+            "provisioningType": { "type": "string" },
+            "healthStatus": { "type": "string" },
+            "operationalStatus": { "type": "string" },
+            "isInfraVolume": { "type": "boolean" },
+            "isDeduplicationEnabled": { "type": "boolean" }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

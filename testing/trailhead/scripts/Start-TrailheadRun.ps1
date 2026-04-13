@@ -1,0 +1,196 @@
+<#
+.SYNOPSIS
+    Initialises a new Operation TRAILHEAD test run.
+
+.DESCRIPTION
+    Platform-canonical TRAILHEAD run initializer. Creates two artefacts:
+        1. A date-stamped Markdown run log under tests/trailhead/logs/
+        2. A GitHub issue that acts as a live commentary feed for the run
+
+    After calling this script, dot-source the companion helper to get Write-TH*
+    logging functions in your session:
+
+        . .\tests\trailhead\scripts\TrailheadLog-Helpers.ps1
+
+    Then use:
+        Write-THPass   "P0.1" "PowerShell 7.6.0"
+        Write-THFail   "P0.8" "ICMP to node03 timed out"
+        Write-THFix    "P0.8" "Confirmed node03 online; retry passed"
+        Write-THNote   "Starting P1 — auth checks"
+        Write-THSkip   "P2.3" "KV path — not applicable for this environment"
+
+    At the end of a session, call:
+        Close-THRun -Passed $n -Failed $m
+
+.PARAMETER Version
+    Module/tool version under test. If omitted, the script tries to read it
+    from -ManifestPath (PSD1). Falls back to "unknown".
+
+.PARAMETER ManifestPath
+    Path to the PowerShell module manifest (.psd1) to read ModuleVersion from.
+    Relative to -RepoRoot. Example: 'S2DCartographer.psd1'
+
+.PARAMETER Environment
+    Target environment label (default: tplabs).
+
+.PARAMETER Phase
+    Which phase to start at (0–7). Purely informational in the log header.
+
+.PARAMETER RepoRoot
+    Path to the consumer repo root. Defaults to the directory three levels
+    above this script (tests/trailhead/scripts/).
+
+.PARAMETER IssueLabels
+    Additional GitHub issue labels to apply beyond 'type/infra'.
+    Example: @('solution/s2dcartographer')
+
+.EXAMPLE
+    # Basic usage (reads version from S2DCartographer.psd1)
+    .\tests\trailhead\scripts\Start-TrailheadRun.ps1 -ManifestPath 'S2DCartographer.psd1' -IssueLabels @('solution/s2dcartographer')
+
+.EXAMPLE
+    # With explicit version
+    .\tests\trailhead\scripts\Start-TrailheadRun.ps1 -Version "1.2.0" -IssueLabels @('solution/ranger')
+#>
+[CmdletBinding()]
+param(
+    [string]$Version,
+    [string]$ManifestPath,
+    [string]$Environment = "tplabs",
+    [ValidateRange(0,7)]
+    [int]$Phase = 0,
+    [string]$RepoRoot,
+    [string[]]$IssueLabels = @()
+)
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+
+# ── Resolve paths ──────────────────────────────────────────────────────────────
+if (-not $RepoRoot) {
+    $RepoRoot = Resolve-Path (Join-Path $PSScriptRoot '..\..\..') | Select-Object -ExpandProperty Path
+}
+$logsDir   = Join-Path $RepoRoot "tests\trailhead\logs"
+$helpersPs = Join-Path $RepoRoot "tests\trailhead\scripts\TrailheadLog-Helpers.ps1"
+
+if (-not (Test-Path $logsDir)) {
+    New-Item -ItemType Directory -Path $logsDir -Force | Out-Null
+}
+
+# ── Resolve version if not supplied ───────────────────────────────────────────
+if (-not $Version -and $ManifestPath) {
+    $psdPath = Join-Path $RepoRoot $ManifestPath
+    if (Test-Path $psdPath) {
+        $psdContent = Get-Content $psdPath -Raw
+        if ($psdContent -match "ModuleVersion\s*=\s*'([^']+)'") {
+            $Version = $Matches[1]
+        }
+    }
+}
+if (-not $Version) { $Version = "unknown" }
+
+# ── Generate run ID ───────────────────────────────────────────────────────────
+$runStamp = Get-Date -Format "yyyyMMdd-HHmm"
+$runId    = "TRAILHEAD-$runStamp"
+$logFile  = Join-Path $logsDir "run-$runStamp.md"
+
+# ── Build log file ────────────────────────────────────────────────────────────
+$tzOffset  = [System.TimeZoneInfo]::Local.BaseUtcOffset
+$tzString  = "UTC{0:+00;-00}:{1:00}" -f $tzOffset.Hours, [Math]::Abs($tzOffset.Minutes)
+$startedAt = "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') $tzString"
+
+$header = @"
+# Operation TRAILHEAD — Run Log
+
+| Field | Value |
+|---|---|
+| Run ID | ``$runId`` |
+| Version | v$Version |
+| Environment | $Environment |
+| Starting Phase | P$Phase |
+| Tester | $(whoami) |
+| Started | $startedAt |
+| Log file | ``tests/trailhead/logs/run-$runStamp.md`` |
+
+---
+
+## Legend
+
+| Mark | Meaning |
+|---|---|
+| ✅ PASS | Check passed — no action required |
+| ❌ FAIL | Check failed — see Fix entry |
+| 🔧 FIX | Remediation applied after a failure |
+| ℹ️ NOTE | Context, observation, or next-step annotation |
+| ⏭️ SKIP | Check intentionally skipped — reason noted |
+
+---
+
+## Run Entries
+
+"@
+
+New-Item -ItemType File -Path $logFile -Value $header -Force | Out-Null
+Write-Host "✅ Log file created: $logFile" -ForegroundColor Green
+
+# ── Create GitHub run-log issue ───────────────────────────────────────────────
+$issueBody = @"
+## Operation TRAILHEAD — Live Run Log
+
+| Field | Value |
+|---|---|
+| Run ID | ``$runId`` |
+| Version | v$Version |
+| Environment | $Environment |
+| Starting Phase | P$Phase |
+| Log file | ``tests/trailhead/logs/run-$runStamp.md`` |
+
+This issue is the live commentary feed for this test run.
+Results are also written to the log file above, which will be committed at end of session.
+
+---
+
+_Run started: $(Get-Date -Format "yyyy-MM-dd HH:mm") — entries follow as comments_
+"@
+
+Write-Host "Creating GitHub run-log issue..." -ForegroundColor Cyan
+
+$ghArgs = @(
+    'issue', 'create',
+    '--title', "[TRAILHEAD RUN] $runId — v$Version on $Environment",
+    '--body', $issueBody,
+    '--label', 'type/infra'
+)
+foreach ($label in $IssueLabels) {
+    $ghArgs += '--label'
+    $ghArgs += $label
+}
+
+$issueUrl = gh @ghArgs
+
+if ($LASTEXITCODE -eq 0) {
+    Write-Host "✅ Run-log issue: $issueUrl" -ForegroundColor Green
+    $issueNumber = ($issueUrl -split '/')[-1]
+} else {
+    Write-Warning "Could not create GitHub issue — run will log to file only."
+    $issueNumber = $null
+}
+
+# ── Write env vars for helpers ────────────────────────────────────────────────
+$env:TH_LOG_FILE      = $logFile
+$env:TH_ISSUE_NUMBER  = $issueNumber
+$env:TH_RUN_ID        = $runId
+$env:TH_REPO_ROOT     = $RepoRoot
+
+Write-Host ""
+Write-Host "──────────────────────────────────────────────" -ForegroundColor DarkGray
+Write-Host " Run ID  : $runId" -ForegroundColor White
+Write-Host " Log     : $logFile" -ForegroundColor White
+if ($issueNumber) {
+Write-Host " Issue   : $issueUrl" -ForegroundColor White
+}
+Write-Host "──────────────────────────────────────────────" -ForegroundColor DarkGray
+Write-Host ""
+Write-Host "Next: dot-source the helpers into your session:" -ForegroundColor Yellow
+Write-Host "  . '$helpersPs'" -ForegroundColor Cyan
+Write-Host ""

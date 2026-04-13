@@ -1,0 +1,92 @@
+{
+  "infrastructure_type": "azure_local",
+  "_metadata": {
+    "fixture": "iic-azure-local-01",
+    "description": "Canonical IIC Azure Local cluster — 4-node Dell PowerEdge R760, 4x 3.84 TB NVMe per node, all-NVMe S2D, 3-way mirror resiliency. The reference environment for all AzureLocal platform contract tests.",
+    "nodeCount": 4,
+    "totalRawCapacityBytes": 61440000000000,
+    "expectedReserveStatus": "Adequate",
+    "capacityDisksPerNode": 4,
+    "capacityDiskSizeBytes": 3840000000000,
+    "cacheDisksPerNode": 0,
+    "expectedThinOvercommit": false
+  },
+  "clusterName": "azlocal-iic-s2d-01",
+  "clusterFqdn": "azlocal-iic-s2d-01.iic.local",
+  "nodeCount": 4,
+  "nodes": [
+    "azl-iic-n01.iic.local",
+    "azl-iic-n02.iic.local",
+    "azl-iic-n03.iic.local",
+    "azl-iic-n04.iic.local"
+  ],
+  "storagePool": {
+    "friendlyName": "S2D on azlocal-iic-s2d-01",
+    "sizeBytes": 61132800000000,
+    "allocatedSizeBytes": 15360000000000,
+    "remainingSizeBytes": 45772800000000,
+    "healthStatus": "Healthy",
+    "operationalStatus": "OK",
+    "faultDomainAwarenessDefault": "StorageScaleUnit",
+    "isReadOnly": false
+  },
+  "physicalDisks": [
+    { "nodeName": "azl-iic-n01", "friendlyName": "INTEL SSDPE2KX040T8", "serialNumber": "IIC01N01D1", "mediaType": "NVMe", "busType": "NVMe", "usage": "Auto-Select", "role": "Capacity", "sizeBytes": 3840000000000, "healthStatus": "Healthy", "operationalStatus": "OK", "wear": 5,  "temperature": 37, "powerOnHours": 17820, "firmwareVersion": "VCV10162", "manufacturer": "Intel" },
+    { "nodeName": "azl-iic-n01", "friendlyName": "INTEL SSDPE2KX040T8", "serialNumber": "IIC01N01D2", "mediaType": "NVMe", "busType": "NVMe", "usage": "Auto-Select", "role": "Capacity", "sizeBytes": 3840000000000, "healthStatus": "Healthy", "operationalStatus": "OK", "wear": 6,  "temperature": 36, "powerOnHours": 17820, "firmwareVersion": "VCV10162", "manufacturer": "Intel" },
+    { "nodeName": "azl-iic-n01", "friendlyName": "INTEL SSDPE2KX040T8", "serialNumber": "IIC01N01D3", "mediaType": "NVMe", "busType": "NVMe", "usage": "Auto-Select", "role": "Capacity", "sizeBytes": 3840000000000, "healthStatus": "Healthy", "operationalStatus": "OK", "wear": 7,  "temperature": 38, "powerOnHours": 17820, "firmwareVersion": "VCV10162", "manufacturer": "Intel" },
+    { "nodeName": "azl-iic-n01", "friendlyName": "INTEL SSDPE2KX040T8", "serialNumber": "IIC01N01D4", "mediaType": "NVMe", "busType": "NVMe", "usage": "Auto-Select", "role": "Capacity", "sizeBytes": 3840000000000, "healthStatus": "Healthy", "operationalStatus": "OK", "wear": 5,  "temperature": 37, "powerOnHours": 17820, "firmwareVersion": "VCV10162", "manufacturer": "Intel" },
+    { "nodeName": "azl-iic-n02", "friendlyName": "INTEL SSDPE2KX040T8", "serialNumber": "IIC01N02D1", "mediaType": "NVMe", "busType": "NVMe", "usage": "Auto-Select", "role": "Capacity", "sizeBytes": 3840000000000, "healthStatus": "Healthy", "operationalStatus": "OK", "wear": 6,  "temperature": 36, "powerOnHours": 17822, "firmwareVersion": "VCV10162", "manufacturer": "Intel" },
+    { "nodeName": "azl-iic-n02", "friendlyName": "INTEL SSDPE2KX040T8", "serialNumber": "IIC01N02D2", "mediaType": "NVMe", "busType": "NVMe", "usage": "Auto-Select", "role": "Capacity", "sizeBytes": 3840000000000, "healthStatus": "Healthy", "operationalStatus": "OK", "wear": 7,  "temperature": 37, "powerOnHours": 17822, "firmwareVersion": "VCV10162", "manufacturer": "Intel" },
+    { "nodeName": "azl-iic-n02", "friendlyName": "INTEL SSDPE2KX040T8", "serialNumber": "IIC01N02D3", "mediaType": "NVMe", "busType": "NVMe", "usage": "Auto-Select", "role": "Capacity", "sizeBytes": 3840000000000, "healthStatus": "Healthy", "operationalStatus": "OK", "wear": 5,  "temperature": 38, "powerOnHours": 17822, "firmwareVersion": "VCV10162", "manufacturer": "Intel" },
+    { "nodeName": "azl-iic-n02", "friendlyName": "INTEL SSDPE2KX040T8", "serialNumber": "IIC01N02D4", "mediaType": "NVMe", "busType": "NVMe", "usage": "Auto-Select", "role": "Capacity", "sizeBytes": 3840000000000, "healthStatus": "Healthy", "operationalStatus": "OK", "wear": 8,  "temperature": 36, "powerOnHours": 17822, "firmwareVersion": "VCV10162", "manufacturer": "Intel" },
+    { "nodeName": "azl-iic-n03", "friendlyName": "INTEL SSDPE2KX040T8", "serialNumber": "IIC01N03D1", "mediaType": "NVMe", "busType": "NVMe", "usage": "Auto-Select", "role": "Capacity", "sizeBytes": 3840000000000, "healthStatus": "Healthy", "operationalStatus": "OK", "wear": 5,  "temperature": 37, "powerOnHours": 17819, "firmwareVersion": "VCV10162", "manufacturer": "Intel" },
+    { "nodeName": "azl-iic-n03", "friendlyName": "INTEL SSDPE2KX040T8", "serialNumber": "IIC01N03D2", "mediaType": "NVMe", "busType": "NVMe", "usage": "Auto-Select", "role": "Capacity", "sizeBytes": 3840000000000, "healthStatus": "Healthy", "operationalStatus": "OK", "wear": 6,  "temperature": 36, "powerOnHours": 17819, "firmwareVersion": "VCV10162", "manufacturer": "Intel" },
+    { "nodeName": "azl-iic-n03", "friendlyName": "INTEL SSDPE2KX040T8", "serialNumber": "IIC01N03D3", "mediaType": "NVMe", "busType": "NVMe", "usage": "Auto-Select", "role": "Capacity", "sizeBytes": 3840000000000, "healthStatus": "Healthy", "operationalStatus": "OK", "wear": 7,  "temperature": 38, "powerOnHours": 17819, "firmwareVersion": "VCV10162", "manufacturer": "Intel" },
+    { "nodeName": "azl-iic-n03", "friendlyName": "INTEL SSDPE2KX040T8", "serialNumber": "IIC01N03D4", "mediaType": "NVMe", "busType": "NVMe", "usage": "Auto-Select", "role": "Capacity", "sizeBytes": 3840000000000, "healthStatus": "Healthy", "operationalStatus": "OK", "wear": 5,  "temperature": 37, "powerOnHours": 17819, "firmwareVersion": "VCV10162", "manufacturer": "Intel" },
+    { "nodeName": "azl-iic-n04", "friendlyName": "INTEL SSDPE2KX040T8", "serialNumber": "IIC01N04D1", "mediaType": "NVMe", "busType": "NVMe", "usage": "Auto-Select", "role": "Capacity", "sizeBytes": 3840000000000, "healthStatus": "Healthy", "operationalStatus": "OK", "wear": 6,  "temperature": 36, "powerOnHours": 17821, "firmwareVersion": "VCV10162", "manufacturer": "Intel" },
+    { "nodeName": "azl-iic-n04", "friendlyName": "INTEL SSDPE2KX040T8", "serialNumber": "IIC01N04D2", "mediaType": "NVMe", "busType": "NVMe", "usage": "Auto-Select", "role": "Capacity", "sizeBytes": 3840000000000, "healthStatus": "Healthy", "operationalStatus": "OK", "wear": 7,  "temperature": 37, "powerOnHours": 17821, "firmwareVersion": "VCV10162", "manufacturer": "Intel" },
+    { "nodeName": "azl-iic-n04", "friendlyName": "INTEL SSDPE2KX040T8", "serialNumber": "IIC01N04D3", "mediaType": "NVMe", "busType": "NVMe", "usage": "Auto-Select", "role": "Capacity", "sizeBytes": 3840000000000, "healthStatus": "Healthy", "operationalStatus": "OK", "wear": 5,  "temperature": 38, "powerOnHours": 17821, "firmwareVersion": "VCV10162", "manufacturer": "Intel" },
+    { "nodeName": "azl-iic-n04", "friendlyName": "INTEL SSDPE2KX040T8", "serialNumber": "IIC01N04D4", "mediaType": "NVMe", "busType": "NVMe", "usage": "Auto-Select", "role": "Capacity", "sizeBytes": 3840000000000, "healthStatus": "Healthy", "operationalStatus": "OK", "wear": 6,  "temperature": 36, "powerOnHours": 17821, "firmwareVersion": "VCV10162", "manufacturer": "Intel" }
+  ],
+  "virtualDisks": [
+    {
+      "friendlyName": "ClusterPerformanceHistory",
+      "sizeBytes": 268435456000,
+      "footprintOnPoolBytes": 805306368000,
+      "allocatedSizeBytes": 268435456000,
+      "resiliencySettingName": "Mirror",
+      "numberOfDataCopies": 3,
+      "provisioningType": "Fixed",
+      "healthStatus": "Healthy",
+      "operationalStatus": "OK",
+      "isInfraVolume": true,
+      "isDeduplicationEnabled": false
+    },
+    {
+      "friendlyName": "IIC-VMs",
+      "sizeBytes": 10000000000000,
+      "footprintOnPoolBytes": 30000000000000,
+      "allocatedSizeBytes": 10000000000000,
+      "resiliencySettingName": "Mirror",
+      "numberOfDataCopies": 3,
+      "provisioningType": "Fixed",
+      "healthStatus": "Healthy",
+      "operationalStatus": "OK",
+      "isInfraVolume": false,
+      "isDeduplicationEnabled": false
+    }
+  ],
+  "hardware": {
+    "model": "PowerEdge R760",
+    "manufacturer": "Dell Inc."
+  },
+  "azure": {
+    "subscriptionId": "33333333-3333-3333-3333-333333333333",
+    "resourceGroup": "rg-iic-compute-01",
+    "tenantId": "00000000-0000-0000-0000-000000000000"
+  },
+  "compliance": {},
+  "performance": {},
+  "user_journey": {},
+  "iac": {}
+}

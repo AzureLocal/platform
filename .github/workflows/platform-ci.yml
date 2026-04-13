@@ -77,6 +77,31 @@ jobs:
           args: --no-progress --max-retries 2 './**/*.md'
           fail: false
 
+  maproom-schema:
+    name: MAPROOM schema validation
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Import AzureLocal.Maproom and validate IIC canon
+        shell: pwsh
+        run: |
+          Import-Module .\testing\maproom\AzureLocal.Maproom.psd1 -Force
+          Get-Module AzureLocal.Maproom | Format-List Name, Version
+
+          # Validate the platform IIC canon fixtures against the schema
+          $canons = Get-ChildItem -Path .\testing\iic-canon\*.json -ErrorAction SilentlyContinue
+          if (-not $canons) {
+            Write-Warning "No IIC canon fixtures found — skipping validation."
+            exit 0
+          }
+          foreach ($f in $canons) {
+            Write-Host "Validating $($f.Name)..."
+            Test-MaproomFixture -Path $f.FullName | Out-Null
+            Write-Host "  OK $($f.Name)"
+          }
+          Write-Host "All $($canons.Count) IIC canon fixture(s) passed schema validation."
+
   structure:
     name: Structure self-test
     runs-on: ubuntu-latest
