@@ -11,9 +11,7 @@ jobs:
     uses: AzureLocal/.github/.github/workflows/reusable-add-to-project.yml@main
     with:
       id-prefix: PLATFORM
-      # TODO: Update solution-option-id to the GUID for the "Platform" option on the Azure Local Solutions project board.
-      # The ID can be found via: gh api graphql -f query='{ organization(login: "AzureLocal") { projectV2(number: 3) { fields(first: 20) { nodes { ... on ProjectV2SingleSelectField { name options { id name } } } } } } }'
-      solution-option-id: REPLACE_WITH_SOLUTION_OPTION_ID
+      solution-option-id: '9c3da2ef'
     secrets:
       AZL_APP_ID: ${{ secrets.AZL_APP_ID }}
       AZL_APP_PRIVATE_KEY: ${{ secrets.AZL_APP_PRIVATE_KEY }}

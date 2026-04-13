@@ -67,4 +67,4 @@ Ask one question: *does every AzureLocal repo benefit from this, or only a subse
 
 - [Consumer patterns](consumer-patterns.md) — copy-paste examples
 - [Versioning](versioning.md) — how to pin, how to bump
-- [ADR 0004 (pending) — reusable-workflow-split](https://github.com/AzureLocal/platform/blob/main/decisions/0004-reusable-workflow-split.md)
+- [ADR 0005 — reusable-workflow-split](https://github.com/AzureLocal/platform/blob/main/decisions/0005-reusable-workflow-split.md)

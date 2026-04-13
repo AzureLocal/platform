@@ -8,8 +8,9 @@ Lightweight, numbered, immutable records of cross-cutting decisions that affect 
 |---|---|---|
 | [0001](./0001-create-platform-repo.md) | Create AzureLocal platform repo | Accepted |
 | [0002](./0002-standards-single-source.md) | Standards as single source of truth | Accepted |
-| `0003` | MAPROOM & IIC canon (pending Phase 2) | Proposed |
-| `0004` | Reusable workflow split between .github and platform | Proposed |
+| [0003](./0003-maproom-iic-canon.md) | MAPROOM framework & IIC canon centralization | Accepted |
+| [0004](./0004-testing-toolset-classification.md) | Testing toolset classification rubric | Accepted |
+| [0005](./0005-reusable-workflow-split.md) | Reusable workflow split between .github and platform | Accepted |
 
 ## When to write an ADR
 

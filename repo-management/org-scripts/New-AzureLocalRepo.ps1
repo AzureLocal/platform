@@ -70,6 +70,9 @@ param(
 
     [string]$ModuleName,
 
+    [Parameter(HelpMessage='GUID for the matching option on the AzureLocal Solutions project board (Solution field). Look up via: gh api graphql -f query=''{ organization(login: "AzureLocal") { projectV2(number: 3) { fields(first: 30) { nodes { ... on ProjectV2SingleSelectField { name options { id name } } } } } } }''')]
+    [string]$SolutionOptionId = '',
+
     [switch]$DryRun,
     [switch]$SkipBranchProtection,
     [switch]$SkipLabels,
@@ -113,6 +116,12 @@ $tokens = @{
     '{{MODULE_GUID}}'      = [guid]::NewGuid().ToString()
     '{{ID_PREFIX}}'        = $ModuleName.ToUpper()
     '{{MAPROOM}}'          = if ($Type -eq 'ps-module') { 'true' } else { 'false' }
+    '{{SOLUTION_OPTION_ID}}' = $SolutionOptionId
+}
+
+if (-not $SolutionOptionId) {
+    Log 'WARN' "No -SolutionOptionId supplied. add-to-project.yml will need a manual edit before the workflow runs successfully."
+    Log 'INFO' "Look up the GUID with: gh api graphql -f query='{ organization(login: \"AzureLocal\") { projectV2(number: 3) { fields(first: 30) { nodes { ... on ProjectV2SingleSelectField { name options { id name } } } } } } }'"
 }
 
 # Workflows adopted
@@ -214,9 +223,20 @@ try {
     git config user.email 'github-actions[bot]@users.noreply.github.com'
     git config user.name  'github-actions[bot]'
     git remote add origin "https://github.com/AzureLocal/$Name.git"
+
+    # gh repo create --license MIT seeds remote main with a LICENSE commit.
+    # Pull it in so the scaffold push isn't rejected as non-fast-forward.
+    git fetch origin main --quiet 2>$null
+    if ($LASTEXITCODE -eq 0) {
+        git reset --soft FETCH_HEAD --quiet
+    }
+
     git add -A
     git commit -m "chore: scaffold $Name from platform template ($Type)" --quiet
     git push -u origin main --quiet
+    if ($LASTEXITCODE -ne 0) {
+        throw "git push to AzureLocal/$Name failed (exit $LASTEXITCODE) — scaffold not on remote."
+    }
     Log PASS "Initial commit pushed."
 } finally {
     Pop-Location

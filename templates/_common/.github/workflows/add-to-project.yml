@@ -11,7 +11,7 @@ jobs:
     uses: AzureLocal/.github/.github/workflows/reusable-add-to-project.yml@main
     with:
       id-prefix: {{ID_PREFIX}}
-      solution-option-id: REPLACE_WITH_SOLUTION_OPTION_ID
+      solution-option-id: '{{SOLUTION_OPTION_ID}}'
     secrets:
       AZL_APP_ID: ${{ secrets.AZL_APP_ID }}
       AZL_APP_PRIVATE_KEY: ${{ secrets.AZL_APP_PRIVATE_KEY }}
