@@ -10,7 +10,7 @@
 
 Every AzureLocal repo uses a single YAML config file — `config/variables/variables.yml` — as input to all automation (Terraform, Bicep, PowerShell, Ansible). The file is not committed; you copy the template and fill it in.
 
-```
+```text
                   ┌──────────────────────────────┐
                   │  Master Registry (970+ vars)  │
                   │  master-registry.yaml         │
@@ -62,7 +62,7 @@ Scripts bootstrap automatically — if `config/variables/variables.yml` is missi
 
 The registry is the single source of truth for **every variable** across all repos:
 
-```
+```text
 azurelocal-toolkit/config/variables/schema/master-registry.yaml
 ```
 
@@ -121,7 +121,7 @@ All located in `azurelocal-toolkit/config/variables/schema/`.
 
 ### Per-Repository Structure
 
-```
+```text
 config/
 └── variables/
     ├── variables.example.yml    # Template with IIC examples (committed)
@@ -250,6 +250,7 @@ $aliases = Get-CanonicalAliasMap
 ```
 
 **Key behaviors:**
+
 - Auto-bootstraps from `config/variables/variables.example.yml` if `config/variables/variables.yml` is missing
 - Resolves aliases from the master registry (old path → canonical path)
 - Supports array indexing: `compute.cluster_nodes[0].hostname`
@@ -305,6 +306,7 @@ $kvName = $config.security.key_vaults.management.name
 ```
 
 **Merge order (later wins):**
+
 1. Master registry defaults
 2. Environment config (`config/environments/{env}.yaml`)
 3. Solution config (`solutions/{solution}/config/solution.yaml`)
@@ -353,6 +355,7 @@ Creates a solution-specific YAML config by combining `solutions.yaml` + master r
 ```
 
 **What it does:**
+
 - Reads the solution definition from `solutions.yaml` to get required variable groups
 - Pulls actual values from `infrastructure-{env}.yml`
 - Validates required variables are present

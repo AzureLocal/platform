@@ -54,7 +54,7 @@ Copy `CONTRIBUTING.md` and `LICENSE` from any existing AzureLocal repo, or use t
 
 Minimum required directories:
 
-```
+```text
 <repo>/
 ├── docs/          # Documentation source
 ├── .github/
@@ -66,7 +66,7 @@ Minimum required directories:
 
 If the solution uses infrastructure configuration, also add:
 
-```
+```text
 ├── config/
 │   ├── variables.example.yml
 │   └── schema/
@@ -244,7 +244,7 @@ Open a PR on `azurelocal.github.io` to:
 
 ## Checklist
 
-```
+```text
 [ ] Repository created under AzureLocal org
 [ ] Required root files present (README, CONTRIBUTING, LICENSE, CHANGELOG, .gitignore)
 [ ] docs/ and .github/workflows/ directories created
