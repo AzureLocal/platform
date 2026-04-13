@@ -107,19 +107,20 @@ extra:
 
 nav:
   - Home: index.md
-  - Getting started:
-      - getting-started/index.md
-      - What is platform: getting-started/what-is-platform.md
-      - Why platform exists: getting-started/why-platform-exists.md
-      - Architecture overview: getting-started/architecture-overview.md
-      - Glossary: getting-started/glossary.md
-      - Quick links: getting-started/quick-links.md
-  - Onboarding:
-      - onboarding/index.md
-      - Adopt from an existing repo: onboarding/adopt-from-existing-repo.md
-      - Create a new repo: onboarding/create-new-repo.md
-      - Migration checklist: onboarding/migration-checklist.md
-      - Rollback: onboarding/rollback.md
+  - Start:
+      - Getting started:
+          - getting-started/index.md
+          - What is platform: getting-started/what-is-platform.md
+          - Why platform exists: getting-started/why-platform-exists.md
+          - Architecture overview: getting-started/architecture-overview.md
+          - Glossary: getting-started/glossary.md
+          - Quick links: getting-started/quick-links.md
+      - Onboarding:
+          - onboarding/index.md
+          - Adopt from an existing repo: onboarding/adopt-from-existing-repo.md
+          - Create a new repo: onboarding/create-new-repo.md
+          - Migration checklist: onboarding/migration-checklist.md
+          - Rollback: onboarding/rollback.md
   - Standards:
       - standards/index.md
       - Automation: standards/automation.md
@@ -137,7 +138,7 @@ nav:
       - Contributing: standards/contributing.md
       - Propagation: standards/propagation.md
       - Authoring guide: standards/authoring-guide.md
-  - Reusable workflows:
+  - Workflows:
       - reusable-workflows/index.md
       - Split rule: reusable-workflows/split-rule.md
       - Versioning: reusable-workflows/versioning.md
@@ -148,52 +149,49 @@ nav:
       - mkdocs-deploy: reusable-workflows/mkdocs-deploy.md
       - maproom-run: reusable-workflows/maproom-run.md
       - drift-check: reusable-workflows/drift-check.md
-  - MAPROOM:
-      - maproom/index.md
-      - Overview: maproom/overview.md
-      - Framework architecture: maproom/framework-architecture.md
-      - IIC canon: maproom/iic-canon.md
-      - Authoring fixtures: maproom/authoring-fixtures.md
-      - Writing unit tests: maproom/writing-unit-tests.md
-      - Integration model: maproom/integration-model.md
-      - Extending the framework: maproom/extending-the-framework.md
-      - Troubleshooting: maproom/troubleshooting.md
+  - Testing:
+      - testing/index.md
+      - MAPROOM:
+          - maproom/index.md
+          - Overview: maproom/overview.md
+          - Framework architecture: maproom/framework-architecture.md
+          - IIC canon: maproom/iic-canon.md
+          - Authoring fixtures: maproom/authoring-fixtures.md
+          - Writing unit tests: maproom/writing-unit-tests.md
+          - Integration model: maproom/integration-model.md
+          - Extending the framework: maproom/extending-the-framework.md
+          - Troubleshooting: maproom/troubleshooting.md
+      - TRAILHEAD:
+          - trailhead/index.md
+          - Overview: trailhead/overview.md
+          - Cycle planning: trailhead/cycle-planning.md
+          - Evidence capture: trailhead/evidence-capture.md
+          - Safety checklist: trailhead/safety-checklist.md
+          - Post-run review: trailhead/post-run-review.md
+      - Future toolsets: testing/future-toolsets.md
       - Repo survey: testing/repo-survey.md
-  - TRAILHEAD:
-      - trailhead/index.md
-      - Overview: trailhead/overview.md
-      - Cycle planning: trailhead/cycle-planning.md
-      - Evidence capture: trailhead/evidence-capture.md
-      - Safety checklist: trailhead/safety-checklist.md
-      - Post-run review: trailhead/post-run-review.md
-  - Repo management:
-      - repo-management/index.md
-      - Overview: repo-management/overview.md
-      - New-repo bootstrap: repo-management/new-repo-bootstrap.md
-      - Drift audit: repo-management/drift-audit.md
-      - Label sync: repo-management/label-sync.md
-      - Branch protection: repo-management/branch-protection.md
-      - Common file sync: repo-management/common-file-sync.md
-      - Emergency runbooks: repo-management/emergency-runbooks.md
-  - Templates:
-      - scaffolds/index.md
-      - Overview: scaffolds/overview.md
-      - ps-module: scaffolds/ps-module.md
-      - ts-web-app: scaffolds/ts-web-app.md
-      - iac-solution: scaffolds/iac-solution.md
-      - migration-runbook: scaffolds/migration-runbook.md
-      - training-site: scaffolds/training-site.md
-      - Authoring a new variant: scaffolds/authoring-new-variant.md
-  - Modules:
-      - modules/index.md
-      - AzureLocal.Common: modules/AzureLocal.Common.md
-  - Governance:
-      - governance/index.md
-      - ADR process: governance/adr-process.md
-      - Release cycle: governance/release-cycle.md
-      - Versioning: governance/versioning.md
-      - Breaking changes: governance/breaking-changes.md
-      - CODEOWNERS & reviewers: governance/codeowners-and-reviewers.md
+  - Operations:
+      - Repo management:
+          - repo-management/index.md
+          - Overview: repo-management/overview.md
+          - New-repo bootstrap: repo-management/new-repo-bootstrap.md
+          - Drift audit: repo-management/drift-audit.md
+          - Label sync: repo-management/label-sync.md
+          - Branch protection: repo-management/branch-protection.md
+          - Common file sync: repo-management/common-file-sync.md
+          - Emergency runbooks: repo-management/emergency-runbooks.md
+      - Templates:
+          - scaffolds/index.md
+          - Overview: scaffolds/overview.md
+          - ps-module: scaffolds/ps-module.md
+          - ts-web-app: scaffolds/ts-web-app.md
+          - iac-solution: scaffolds/iac-solution.md
+          - migration-runbook: scaffolds/migration-runbook.md
+          - training-site: scaffolds/training-site.md
+          - Authoring a new variant: scaffolds/authoring-new-variant.md
+      - Modules:
+          - modules/index.md
+          - AzureLocal.Common: modules/AzureLocal.Common.md
   - Reference:
       - reference/index.md
       - Folder structure: reference/folder-structure.md
@@ -202,9 +200,17 @@ nav:
       - Env & secrets: reference/env-secrets.md
       - Troubleshooting: reference/troubleshooting.md
       - FAQ: reference/faq.md
-  - Contributing:
-      - contributing/index.md
-      - Local setup: contributing/local-setup.md
-      - PR workflow: contributing/pr-workflow.md
-      - Testing platform: contributing/testing-platform.md
-      - Release process: contributing/release-process.md
+  - Project:
+      - Governance:
+          - governance/index.md
+          - ADR process: governance/adr-process.md
+          - Release cycle: governance/release-cycle.md
+          - Versioning: governance/versioning.md
+          - Breaking changes: governance/breaking-changes.md
+          - CODEOWNERS & reviewers: governance/codeowners-and-reviewers.md
+      - Contributing:
+          - contributing/index.md
+          - Local setup: contributing/local-setup.md
+          - PR workflow: contributing/pr-workflow.md
+          - Testing platform: contributing/testing-platform.md
+          - Release process: contributing/release-process.md
