@@ -7,7 +7,7 @@
 
 ## Context
 
-MAPROOM — the contract-testing framework that asserts a live target (cluster, host pool, tenancy, fleet) matches an expected shape encoded as a JSON fixture — currently lives in [`azurelocal-S2DCartographer/tests/maproom/`](https://github.com/AzureLocal/azurelocal-S2DCartographer/tree/main/tests/maproom). The IIC canon (`iic-org.json`, `iic-cluster-01.json`, `iic-networks.json`) — the canonical test data representing the fictional Infinite Improbability Corp environment — lives alongside it.
+MAPROOM — the contract-testing framework that asserts a live target (cluster, host pool, tenancy, fleet) matches an expected shape encoded as a JSON fixture — currently lives in [`azurelocal-s2d-cartographer/tests/maproom/`](https://github.com/AzureLocal/azurelocal-s2d-cartographer/tree/main/tests/maproom). The IIC canon (`iic-org.json`, `iic-cluster-01.json`, `iic-networks.json`) — the canonical test data representing the fictional Infinite Improbability Corp environment — lives alongside it.
 
 Three problems today:
 
@@ -44,13 +44,13 @@ TRAILHEAD (scenario runner for user journeys) has the same shape of problem but 
 
 ### Neutral
 
-- `azurelocal-S2DCartographer` becomes the first migration — its current `tests/maproom/` is the reference implementation being ported, and once ported it becomes the first consumer of the centralized framework.
+- `azurelocal-s2d-cartographer` becomes the first migration — its current `tests/maproom/` is the reference implementation being ported, and once ported it becomes the first consumer of the centralized framework.
 - `azurelocal-ranger` becomes the **second** consumer, deliberately chosen — two consumers is the minimum signal that the framework isn't secretly S2DCartographer-shaped.
 
 ### Affected repos / owners
 
 - **`AzureLocal/platform`**: gains `testing/maproom/`, `testing/trailhead/`, `testing/iic-canon/`. Phase 2 work.
-- **`azurelocal-S2DCartographer`**: existing `tests/maproom/` is re-pointed at the platform module. Local copy of framework code is deleted; fixtures + tests remain.
+- **`azurelocal-s2d-cartographer`**: existing `tests/maproom/` is re-pointed at the platform module. Local copy of framework code is deleted; fixtures + tests remain.
 - **`azurelocal-ranger`**: switches to consuming platform MAPROOM. Second-consumer validation.
 - **All other product repos**: opt in as their use case matures; required testing surface is documented in [Testing Standards](../standards/testing.mdx).
 
@@ -59,7 +59,7 @@ TRAILHEAD (scenario runner for user journeys) has the same shape of problem but 
 - **Keep MAPROOM in S2DCartographer, let consumers reference it directly.** Rejected — same drift pattern standards had; cross-repo references are fragile and discoverability is poor.
 - **Fork MAPROOM into each consuming repo.** Rejected — this is the current state and is exactly what's not working.
 - **Publish `AzureLocal.Maproom` to PSGallery in v1.** Rejected for now — surface will churn during Phase 2; PSGallery deferred until v0.3 at earliest, probably v1.0.
-- **Generalize the framework in-place (inside `azurelocal-S2DCartographer`).** Rejected — the repo's identity is S2D, not platform tooling; generalization would make the repo's purpose less clear.
+- **Generalize the framework in-place (inside `azurelocal-s2d-cartographer`).** Rejected — the repo's identity is S2D, not platform tooling; generalization would make the repo's purpose less clear.
 
 ## Status
 

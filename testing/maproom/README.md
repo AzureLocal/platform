@@ -31,7 +31,7 @@ Product repos keep their own `tests/maproom/Fixtures/*.json` — those are produ
 
 ## Status
 
-Framework implementation scheduled for Phase 2 of the platform rollout. Until then, see [`azurelocal-S2DCartographer/tests/maproom/`](https://github.com/AzureLocal/azurelocal-S2DCartographer/tree/main/tests/maproom) for the canonical reference implementation being ported.
+Framework implementation scheduled for Phase 2 of the platform rollout. Until then, see [`azurelocal-s2d-cartographer/tests/maproom/`](https://github.com/AzureLocal/azurelocal-s2d-cartographer/tree/main/tests/maproom) for the canonical reference implementation being ported.
 
 ## Documentation
 

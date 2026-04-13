@@ -12,7 +12,7 @@ The AzureLocal GitHub organization owns ~28 active repositories. An audit of the
 - `/repo-management/` folder duplicated across 11 repos with shared template files.
 - `CONTRIBUTING.md` has 10 unique content hashes across 10 repos — every repo has drifted from every other.
 - 9 repos each carry near-duplicate `deploy-docs.yml` workflow files.
-- MAPROOM testing framework (offline fixture-based) exists in mature form only in `azurelocal-S2DCartographer` — other PS module repos would benefit but can't easily share it today.
+- MAPROOM testing framework (offline fixture-based) exists in mature form only in `azurelocal-s2d-cartographer` — other PS module repos would benefit but can't easily share it today.
 - Surveyor (TS/React) and two other repos are missing entire categories of standard files (no `/standards`, no `/repo-management`, no CODEOWNERS).
 
 The existing `AzureLocal/.github` repo already hosts community-health files and three reusable workflows (`reusable-add-to-project.yml`, `reusable-release-please.yml`, `reusable-validate-structure.yml`). That repo is optimized for GitHub-metadata governance. It is NOT the right home for developer tooling, standards *docs*, ADRs, bootstrap scripts, shared PS modules, or a testing framework.

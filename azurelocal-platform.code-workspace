@@ -45,8 +45,8 @@
       "path": "../azurelocal-ranger"
     },
     {
-      "name": "azurelocal-S2DCartographer",
-      "path": "../azurelocal-S2DCartographer"
+      "name": "azurelocal-s2d-cartographer",
+      "path": "../azurelocal-s2d-cartographer"
     },
     {
       "name": "azurelocal-surveyor",

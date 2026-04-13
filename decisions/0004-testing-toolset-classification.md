@@ -7,7 +7,7 @@
 
 ## Context
 
-Phase 2 moves MAPROOM and TRAILHEAD from `azurelocal-S2DCartographer` into `platform/testing/` as the canonical testing framework for all AzureLocal repos. Before Phase 2 implementation begins, three things must be decided:
+Phase 2 moves MAPROOM and TRAILHEAD from `azurelocal-s2d-cartographer` into `platform/testing/` as the canonical testing framework for all AzureLocal repos. Before Phase 2 implementation begins, three things must be decided:
 
 1. How to classify any testing tool — so future toolsets can be evaluated consistently.
 2. What happens to each candidate toolset proposed in issue #3 (ship v0.2.0, defer, or reject).
@@ -182,7 +182,7 @@ Wraps MAPROOM fixtures into a reproducible lab deploy.
 ### Negative
 
 - Six repos currently have zero test infrastructure. MUSTER will flag them as non-conformant at Phase 4 drift audit. This is intentional — the Phase 3 reusable workflow rollout is the forcing function to get those repos testing.
-- IIC canon rename (`iic-cluster-01.json` → `iic-azure-local-01.json`) is a breaking change for `azurelocal-S2DCartographer`. Acceptable because S2DCartographer is migrated to the platform MAPROOM as part of Phase 2 — the rename happens once, in the migration commit.
+- IIC canon rename (`iic-cluster-01.json` → `iic-azure-local-01.json`) is a breaking change for `azurelocal-s2d-cartographer`. Acceptable because S2DCartographer is migrated to the platform MAPROOM as part of Phase 2 — the rename happens once, in the migration commit.
 
 ## Status of ADR-0003
 

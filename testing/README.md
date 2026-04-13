@@ -6,13 +6,13 @@ Two complementary testing frameworks for AzureLocal repos.
 
 Used when: cluster state can be modeled deterministically and test execution must not touch a live cluster. Works on Linux CI runners.
 
-Lives under [`maproom/`](./maproom). Canonical implementation derived from `azurelocal-S2DCartographer/tests/maproom/` in Phase 2 of the rollout.
+Lives under [`maproom/`](./maproom). Canonical implementation derived from `azurelocal-s2d-cartographer/tests/maproom/` in Phase 2 of the rollout.
 
 ## TRAILHEAD — live field validation
 
 Used when: behavior must be validated against a real Azure Local cluster. Checklist-driven, evidence-capturing, manual or semi-automated cycles.
 
-Lives under [`trailhead/`](./trailhead). Templates derived from `azurelocal-S2DCartographer/tests/trailhead/`.
+Lives under [`trailhead/`](./trailhead). Templates derived from `azurelocal-s2d-cartographer/tests/trailhead/`.
 
 ## IIC canon — canonical synthetic identity data
 

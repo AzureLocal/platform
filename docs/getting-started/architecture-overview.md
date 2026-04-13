@@ -17,7 +17,7 @@ graph LR
     end
     subgraph "Product repos (~25)"
         R1[azurelocal-ranger]
-        R2[azurelocal-S2DCartographer]
+        R2[azurelocal-s2d-cartographer]
         R3[azurelocal-surveyor]
         RN[...other product repos]
     end

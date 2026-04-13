@@ -19,7 +19,7 @@
 | azurelocal-training | ✗ | — | Nothing | None | — |
 | azurelocal-nutanix-migration | ✗ | — | Nothing | None | — |
 | azurelocal-ranger | ✓ | Pester 5 (MAPROOM), field scripts (TRAILHEAD) | Unit (8): Config, DriftDetection, NetworkDevice, Outputs, Runtime, Simulation, StorageNetworkingCollector, WorkloadIdentityAzureCollector; Integration: EndToEnd | `publish-psgallery.yml` — Pester on release; `validate.yml` — manifest/import | ✓ Both |
-| azurelocal-S2DCartographer | ✓ | Pester 5 (MAPROOM), field scripts (TRAILHEAD) | Unit (9): S2D capacity, health, disk, reserve, efficiency, storage pool, volume, FQDN resolution; Integration: synthetic cluster | `validate.yml` — Pester unit tests on PR/push with result publishing | ✓ Both (origin) |
+| azurelocal-s2d-cartographer | ✓ | Pester 5 (MAPROOM), field scripts (TRAILHEAD) | Unit (9): S2D capacity, health, disk, reserve, efficiency, storage pool, volume, FQDN resolution; Integration: synthetic cluster | `validate.yml` — Pester unit tests on PR/push with result publishing | ✓ Both (origin) |
 | azurelocal-surveyor | ✓ | Vitest (TypeScript) | Parity calculations, engine logic; type checking, linting | `ci.yml` — `npm run test` (Vitest), typecheck, lint, build | — |
 
 ---
@@ -150,7 +150,7 @@
 
 ---
 
-### azurelocal-S2DCartographer
+### azurelocal-s2d-cartographer
 
 **Current surface:** Origin of MAPROOM and TRAILHEAD. Nine Pester unit test files covering S2D capacity, health, disk management, storage pool, and volume calculations. Integration test via synthetic cluster fixture. TRAILHEAD field scripts for live cluster validation.
 
