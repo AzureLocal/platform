@@ -17,13 +17,13 @@ We need one authoritative home for standards docs that:
 
 ## Decision
 
-Canonical standards docs live **only** in `AzureLocal/platform/standards/`. No other repo keeps a local copy.
+Canonical standards docs live **only** in `AzureLocal/platform/docs/standards/`. No other repo keeps a local copy.
 
 Distribution model:
 
-1. **Community docs site** (`azurelocal.github.io`) continues to render standards for humans. It pulls `platform/standards/*.mdx` via a scheduled GitHub Actions workflow (scheduled on platform release tags). The site renders, the platform repo authors.
+1. **Community docs site** (`azurelocal.github.io`) continues to render standards for humans. It pulls `platform/docs/standards/*.md` via a scheduled GitHub Actions workflow and publishes them as `.mdx` in the site's `standards/` folder. The site renders, the platform repo authors.
 
-2. **Product repos** carry a `STANDARDS.md` stub (~6 lines) at repo root that links to [`https://github.com/AzureLocal/platform/tree/main/standards`](https://github.com/AzureLocal/platform/tree/main/standards). No files copied.
+2. **Product repos** carry a `STANDARDS.md` stub (~6 lines) at repo root that links to [`https://github.com/AzureLocal/platform/tree/main/docs/standards`](https://github.com/AzureLocal/platform/tree/main/docs/standards). No files copied.
 
 3. **Maintenance**: standards changes are PRs against `platform`. Typos need no ADR; substantive changes do.
 

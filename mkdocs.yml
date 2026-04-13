@@ -122,6 +122,17 @@ nav:
       - Rollback: onboarding/rollback.md
   - Standards:
       - standards/index.md
+      - Automation: standards/automation.md
+      - Documentation: standards/documentation.md
+      - Examples & IIC: standards/examples.md
+      - Infrastructure: standards/infrastructure.md
+      - Naming: standards/naming.md
+      - New repo setup: standards/new-repo-setup.md
+      - Repository management: standards/repository-management.md
+      - Scripting: standards/scripting.md
+      - Solutions: standards/solutions.md
+      - Testing: standards/testing.md
+      - Variables: standards/variables.md
       - Consuming: standards/consuming.md
       - Contributing: standards/contributing.md
       - Propagation: standards/propagation.md
