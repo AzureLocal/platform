@@ -128,6 +128,21 @@ Session-broker-aware journey scripts (logon, app launch, profile mount, logoff) 
 
 **Decision: Defer to v0.3.0.** TRAILHEAD is already in scope for v0.2.0. STORYBOARD is a TRAILHEAD variant specialised for AVD user journeys, not a separate framework. In v0.3.0, evaluate whether STORYBOARD is a TRAILHEAD scenario type or a distinct harness. `azurelocal-avd` is the sole near-term consumer.
 
+#### BLUEPRINT — IaC pre-deploy template assertion · Defer to v0.3.0
+
+| Axis | Value |
+|------|-------|
+| Scope | `platform-feature` |
+| Target | `repo` |
+| Authority | `contract` |
+| Lifecycle | `pre-deploy` |
+
+Asserts that an IaC template (Bicep, Terraform, ARM) produces the expected Azure resource graph *before deployment*. Platform owns the assertion contract (what fields must be present in the expected output, what resource types are required); repos supply their own expected-output fixtures. Distinct from MAPROOM — MAPROOM tests the live deployed result; BLUEPRINT tests the template artifact.
+
+Current gap: `bicep build` and `tflint` validate syntax and lint rules but make no shape assertions. There is no platform tool that says "this Bicep template must produce exactly these resource types with these properties." This gap affects `azurelocal-toolkit`, `azurelocal-avd`, and `azurelocal-sofs-fslogix` today, and every future workload repo (`azurelocal-aks`, `azurelocal-sql-ha`, `azurelocal-sql-mi`, `azurelocal-vms`, `azurelocal-ml-ai`, `azurelocal-iot`, `azurelocal-custom-images`) as they come online.
+
+**Decision: Defer to v0.3.0.** The assertion mechanism differs per tool (`bicep what-if`, `terraform plan -json`, `arm what-if`). The multi-tool parity requirement (all IaC tools produce identical infrastructure) means BLUEPRINT must either handle all three or be a thin wrapper that delegates to tool-specific adapters. That design work belongs after Phase 3 (reusable workflow rollout) when the IaC surface across repos is fully mapped. Add `iac` as a reserved top-level section in MAPROOM fixtures (see §4) to avoid collision.
+
 #### OUTPOST — Demo-env provisioner · Reject
 
 | Axis | Value |
@@ -151,6 +166,7 @@ Wraps MAPROOM fixtures into a reproducible lab deploy.
    - `compliance` — for COMPASS policy assertions
    - `performance` — for PULSE capacity expectations
    - `user_journey` — for STORYBOARD scenario expectations
+   - `iac` — for BLUEPRINT pre-deploy template assertions
 
 3. **IIC canon naming**: `iic-cluster-01.json` is renamed `iic-azure-local-01.json` to signal that domain-specific canons follow the pattern `iic-<infrastructure_type>-<##>.json`. AVD, SOFS, and Nutanix canons are authored in v0.3.0 when their consumer repos establish test surfaces.
 

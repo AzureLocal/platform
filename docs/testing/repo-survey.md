@@ -31,6 +31,7 @@
 **Current surface:** Pester tests cover the config-loader module and schema validation. Python `jsonschema` validates `variables.example.yml` against the JSON Schema. PSScriptAnalyzer runs on all PS scripts.
 
 **Unmet needs:**
+
 - No integration tests — deployment scripts aren't tested against a synthetic AVD environment.
 - No fixture-based testing for host pool shape (candidate: MAPROOM `avd_azure_local` fixture type).
 - No user-journey validation (candidate: STORYBOARD when it ships).
@@ -49,6 +50,7 @@
 **Current surface:** Pester tests cover SOFS deployment scripts for single-node and triple-node layouts, plus state management. Multi-tool CI (Terraform, Bicep, Ansible) validates IaC files.
 
 **Unmet needs:**
+
 - No fixture-based testing for FSLogix profile container shape.
 - Load validation (file-share I/O patterns) not tested (candidate: PULSE).
 
@@ -66,6 +68,7 @@
 **Current surface:** Most mature testing in the org — Pester with JaCoCo code coverage, PSScriptAnalyzer, multi-tool IaC validation. Tests the load tool's own modules (ConfigManager, Logger, ReportGenerator, StateManager).
 
 **Unmet needs:**
+
 - Tests cover the *tool*, not the load profiles it emits. No assertions about whether a given profile is valid for a given cluster shape.
 - Coverage-to-expected-cluster-shape correlation is manual today (candidate: PULSE).
 
@@ -82,6 +85,7 @@
 **Current surface:** None. No test files, no test CI step.
 
 **Unmet needs (everything):**
+
 - Script-level unit tests for the conversion toolkit scripts.
 - Pre/post inventory diffing — assert no workloads, disks, or NICs are dropped during conversion (candidate: LEDGER).
 
@@ -125,6 +129,7 @@
 **Current surface:** None.
 
 **Unmet needs:**
+
 - Migration runbook validation — assert checklists are complete, scripts are syntactically valid.
 - Post-migration inventory diffing (candidate: LEDGER).
 
@@ -158,6 +163,12 @@
 **Current surface:** Vitest (TypeScript/React) — unit tests for parity calculations and engine logic. Type checking, linting, and build validation in CI.
 
 **Notes:** Surveyor is a web application. The MAPROOM/TRAILHEAD/Pester paradigm does not apply. Surveyor's test surface is complete for its paradigm. No platform testing toolset maps to it.
+
+---
+
+## IaC pre-deploy assertion gap
+
+`azurelocal-toolkit`, `azurelocal-avd`, and `azurelocal-sofs-fslogix` all run IaC (Bicep, Terraform, ARM, Ansible) through CI. Current CI validates syntax (`bicep build`, `tflint`, `arm-ttk`) but makes no shape assertions — there is no check that a template produces the expected resource types and properties before it is deployed. This gap will affect every future workload repo (`azurelocal-aks`, `azurelocal-sql-ha`, `azurelocal-sql-mi`, `azurelocal-vms`, `azurelocal-ml-ai`, `azurelocal-iot`, `azurelocal-custom-images`). Addressed by BLUEPRINT (ADR-0004, deferred to v0.3.0).
 
 ---
 
