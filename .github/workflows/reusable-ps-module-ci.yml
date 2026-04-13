@@ -1,0 +1,155 @@
+name: Reusable — PowerShell Module CI
+
+on:
+  workflow_call:
+    inputs:
+      module-manifest:
+        description: Path to the module .psd1 file (relative to repo root)
+        type: string
+        required: true
+      run-psscriptanalyzer:
+        description: Run PSScriptAnalyzer lint
+        type: boolean
+        default: true
+      psscriptanalyzer-path:
+        description: Path(s) to analyse — passed to -Path (space-separated for multiple)
+        type: string
+        default: 'src'
+      run-pester:
+        description: Run Pester unit tests
+        type: boolean
+        default: true
+      pester-test-path:
+        description: Path to Pester test files
+        type: string
+        default: 'tests'
+      pester-result-format:
+        description: Pester test result output format
+        type: string
+        default: 'NUnitXml'
+      validate-maproom:
+        description: Run MAPROOM fixture validation against platform schema
+        type: boolean
+        default: false
+      maproom-fixture-path:
+        description: Path to fixture JSON files (when validate-maproom is true)
+        type: string
+        default: 'tests/maproom/Fixtures'
+
+jobs:
+  psscriptanalyzer:
+    if: ${{ inputs.run-psscriptanalyzer }}
+    name: PSScriptAnalyzer
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module PSScriptAnalyzer -Force -Scope CurrentUser
+
+      - name: Run PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          $paths = '${{ inputs.psscriptanalyzer-path }}' -split ' '
+          $results = @()
+          foreach ($p in $paths) {
+            if (Test-Path $p) {
+              $results += Invoke-ScriptAnalyzer -Path $p -Recurse -Severity Warning,Error
+            }
+          }
+          $errors = @($results | Where-Object { $_.Severity -eq 'Error' })
+          if ($results) { $results | Format-Table -AutoSize }
+          if ($errors.Count -gt 0) {
+            throw "PSScriptAnalyzer found $($errors.Count) blocking error(s)."
+          }
+          Write-Host "PSScriptAnalyzer: no blocking errors."
+
+  pester-unit:
+    if: ${{ inputs.run-pester }}
+    name: Pester Unit Tests
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Pester
+        shell: pwsh
+        run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module Pester -MinimumVersion 5.6.0 -Force -Scope CurrentUser
+
+      - name: Validate module manifest
+        shell: pwsh
+        run: Test-ModuleManifest -Path '${{ inputs.module-manifest }}' | Out-Null
+
+      - name: Run Pester tests
+        shell: pwsh
+        run: |
+          Import-Module '${{ inputs.module-manifest }}' -Force
+          New-Item -ItemType Directory -Force -Path TestResults | Out-Null
+          $config = New-PesterConfiguration
+          $config.Run.Path = '${{ inputs.pester-test-path }}'
+          $config.Output.Verbosity = 'Detailed'
+          $config.TestResult.Enabled = $true
+          $config.TestResult.OutputPath = 'TestResults\pester-results.xml'
+          $config.TestResult.OutputFormat = '${{ inputs.pester-result-format }}'
+          $result = Invoke-Pester -Configuration $config
+          if ($result.FailedCount -gt 0) {
+            Write-Error "Pester: $($result.FailedCount) test(s) failed."
+            exit 1
+          }
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pester-results
+          path: TestResults\pester-results.xml
+
+  maproom:
+    if: ${{ inputs.validate-maproom }}
+    name: MAPROOM Fixture Validation
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checkout platform
+        uses: actions/checkout@v4
+        with:
+          repository: AzureLocal/platform
+          path: _platform
+          ref: main
+
+      - name: Validate fixtures against platform schema
+        shell: pwsh
+        run: |
+          Import-Module .\_platform\testing\maproom\AzureLocal.Maproom.psd1 -Force
+          $fixtures = Get-ChildItem -Path '${{ inputs.maproom-fixture-path }}' -Filter '*.json' |
+              Where-Object { $_.Name -ne 'synthetic-cluster.json' }
+          if (-not $fixtures) {
+            Write-Host "No fixtures found in ${{ inputs.maproom-fixture-path }} — skipping."
+            exit 0
+          }
+          $failed = 0
+          foreach ($f in $fixtures) {
+            try {
+              Test-MaproomFixture -Path $f.FullName | Out-Null
+              Write-Host "  PASS $($f.Name)"
+            } catch {
+              Write-Host "  FAIL $($f.Name): $_"
+              $failed++
+            }
+          }
+          if ($failed -gt 0) {
+            Write-Error "$failed fixture(s) failed platform schema validation."
+            exit 1
+          }
+          Write-Host "All $($fixtures.Count) fixture(s) passed."

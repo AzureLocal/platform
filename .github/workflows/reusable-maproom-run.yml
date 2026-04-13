@@ -1,0 +1,68 @@
+name: Reusable — MAPROOM Run
+
+on:
+  workflow_call:
+    inputs:
+      fixture-path:
+        description: Path to fixture JSON files (relative to repo root)
+        type: string
+        default: 'tests/maproom/Fixtures'
+      exclude-synthetic:
+        description: Exclude synthetic-cluster.json from validation
+        type: boolean
+        default: true
+      platform-ref:
+        description: platform repo ref to check out
+        type: string
+        default: 'main'
+
+jobs:
+  maproom:
+    name: MAPROOM Fixture Validation
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checkout platform
+        uses: actions/checkout@v4
+        with:
+          repository: AzureLocal/platform
+          path: _platform
+          ref: ${{ inputs.platform-ref }}
+
+      - name: Validate fixtures against platform schema
+        shell: pwsh
+        run: |
+          Import-Module .\_platform\testing\maproom\AzureLocal.Maproom.psd1 -Force
+          Write-Host "AzureLocal.Maproom $(( Get-Module AzureLocal.Maproom ).Version) loaded."
+
+          $allFixtures = Get-ChildItem -Path '${{ inputs.fixture-path }}' -Filter '*.json' -ErrorAction SilentlyContinue
+          if (-not $allFixtures) {
+            Write-Host "No fixtures found in ${{ inputs.fixture-path }} — skipping."
+            exit 0
+          }
+
+          $fixtures = if ('${{ inputs.exclude-synthetic }}' -eq 'true') {
+            $allFixtures | Where-Object { $_.Name -ne 'synthetic-cluster.json' }
+          } else {
+            $allFixtures
+          }
+
+          $failed = 0
+          foreach ($f in $fixtures) {
+            try {
+              Test-MaproomFixture -Path $f.FullName | Out-Null
+              Write-Host "  PASS  $($f.Name)"
+            } catch {
+              Write-Host "  FAIL  $($f.Name): $_"
+              $failed++
+            }
+          }
+          Write-Host ""
+          if ($failed -gt 0) {
+            Write-Error "$failed of $($fixtures.Count) fixture(s) failed platform schema validation."
+            exit 1
+          }
+          Write-Host "All $($fixtures.Count) fixture(s) passed platform schema validation."

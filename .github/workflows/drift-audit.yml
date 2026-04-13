@@ -1,8 +1,7 @@
 name: Drift Audit
 
-# Monthly scheduled audit of every AzureLocal repo against canonical
-# standards. Implementation lands in Phase 4 — this stub exists so the
-# schedule and entry point are declared from day one.
+# Monthly org-wide audit of every AzureLocal repo against canonical platform standards.
+# Runs Invoke-RepoAudit.ps1 and files a 'drift-report' issue when repos have drifted.
 
 on:
   schedule:
@@ -20,20 +19,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Placeholder — full implementation in Phase 4
+      - name: Run Invoke-RepoAudit.ps1
         shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          Write-Host '============================================================='
-          Write-Host '  Drift Audit — placeholder                                  '
-          Write-Host '  Full implementation scheduled for Phase 4 of the platform  '
-          Write-Host '  rollout. Once `repo-management/org-scripts/Invoke-RepoAudit.ps1`'
-          Write-Host '  ships, this workflow runs it and files a `drift-report`    '
-          Write-Host '  issue on platform with the results.                        '
-          Write-Host '============================================================='
+          Import-Module ./modules/powershell/AzureLocal.Common/AzureLocal.Common.psd1 -Force
+          ./repo-management/org-scripts/Invoke-RepoAudit.ps1 `
+            -Org AzureLocal `
+            -EmitIssue `
+            -OutputPath drift-report.json
 
-      - name: TODO — Run Invoke-RepoAudit.ps1 (Phase 4)
-        if: false
-        shell: pwsh
-        run: |
-          Import-Module ./modules/powershell/AzureLocal.Common/AzureLocal.Common.psd1
-          ./repo-management/org-scripts/Invoke-RepoAudit.ps1 -Org AzureLocal -EmitIssue
+      - name: Upload drift report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: drift-report-${{ github.run_id }}
+          path: drift-report.json
+          retention-days: 90

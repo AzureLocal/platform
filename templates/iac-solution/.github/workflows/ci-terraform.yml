@@ -1,0 +1,18 @@
+name: CI — Terraform Validate
+
+on:
+  pull_request:
+    paths:
+      - 'src/terraform/**'
+  push:
+    branches: [main]
+    paths:
+      - 'src/terraform/**'
+
+jobs:
+  iac:
+    uses: AzureLocal/platform/.github/workflows/reusable-iac-validate.yml@main
+    with:
+      run-bicep: false
+      run-terraform: true
+      terraform-path: src/terraform

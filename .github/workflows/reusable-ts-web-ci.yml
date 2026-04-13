@@ -1,0 +1,70 @@
+name: Reusable — TypeScript Web CI
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: Node.js version
+        type: string
+        default: '20'
+      package-manager:
+        description: Package manager to use (npm or pnpm)
+        type: string
+        default: 'npm'
+      run-typecheck:
+        description: Run TypeScript type check (npm run typecheck)
+        type: boolean
+        default: true
+      run-lint:
+        description: Run linter (npm run lint)
+        type: boolean
+        default: true
+      run-test:
+        description: Run unit tests
+        type: boolean
+        default: true
+      test-script:
+        description: npm script name for tests
+        type: string
+        default: 'test'
+      test-args:
+        description: Additional arguments passed to the test script
+        type: string
+        default: '--reporter=verbose'
+      run-build:
+        description: Run production build (npm run build)
+        type: boolean
+        default: true
+
+jobs:
+  ci:
+    name: TypeScript CI
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: ${{ inputs.package-manager }}
+
+      - name: Install dependencies
+        run: ${{ inputs.package-manager }} ci
+
+      - name: Type check
+        if: ${{ inputs.run-typecheck }}
+        run: ${{ inputs.package-manager }} run typecheck
+
+      - name: Lint
+        if: ${{ inputs.run-lint }}
+        run: ${{ inputs.package-manager }} run lint
+
+      - name: Unit tests
+        if: ${{ inputs.run-test }}
+        run: ${{ inputs.package-manager }} run ${{ inputs.test-script }} -- ${{ inputs.test-args }}
+
+      - name: Build
+        if: ${{ inputs.run-build }}
+        run: ${{ inputs.package-manager }} run build

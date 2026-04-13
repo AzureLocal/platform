@@ -1,0 +1,74 @@
+name: Reusable — Drift Check
+
+on:
+  workflow_call:
+    inputs:
+      required-files:
+        description: Comma-separated list of files that must exist in the repo
+        type: string
+        default: 'CHANGELOG.md,mkdocs.yml,.github/workflows/deploy-docs.yml'
+      check-platform-deploy-docs:
+        description: Verify deploy-docs.yml calls the platform reusable workflow
+        type: boolean
+        default: true
+      fail-on-drift:
+        description: Exit non-zero if any drift is detected (set false to report-only)
+        type: boolean
+        default: true
+
+jobs:
+  drift:
+    name: Drift Check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required files
+        id: required-files
+        run: |
+          IFS=',' read -ra FILES <<< "${{ inputs.required-files }}"
+          drift=0
+          for f in "${FILES[@]}"; do
+            f="${f// /}"   # strip spaces
+            if [ -f "$f" ]; then
+              echo "  OK   $f"
+            else
+              echo "  MISS $f"
+              drift=$((drift+1))
+            fi
+          done
+          echo "required_drift=$drift" >> "$GITHUB_OUTPUT"
+
+      - name: Check deploy-docs.yml references platform workflow
+        if: ${{ inputs.check-platform-deploy-docs }}
+        id: deploy-docs
+        run: |
+          deploy_file=".github/workflows/deploy-docs.yml"
+          drift=0
+          if [ ! -f "$deploy_file" ]; then
+            echo "  MISS $deploy_file (covered by required-files check)"
+          elif grep -q "AzureLocal/platform/.github/workflows/reusable-mkdocs-deploy.yml" "$deploy_file"; then
+            echo "  OK   $deploy_file references platform reusable workflow"
+          else
+            echo "  DRIFT $deploy_file does not call reusable-mkdocs-deploy.yml"
+            drift=1
+          fi
+          echo "deploy_drift=$drift" >> "$GITHUB_OUTPUT"
+
+      - name: Drift summary
+        run: |
+          required=${{ steps.required-files.outputs.required_drift }}
+          deploy=${{ steps.deploy-docs.outputs.deploy_drift || 0 }}
+          total=$((required + deploy))
+          echo "=============================="
+          echo "  Drift check complete"
+          echo "  Required files drift : $required"
+          echo "  Deploy-docs drift    : $deploy"
+          echo "  Total drift points   : $total"
+          echo "=============================="
+          if [ "$total" -gt 0 ] && [ "${{ inputs.fail-on-drift }}" = "true" ]; then
+            echo "Drift detected — see output above."
+            exit 1
+          fi

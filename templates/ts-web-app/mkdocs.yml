@@ -1,0 +1,45 @@
+site_name: {{REPO_NAME}}
+site_description: {{DESCRIPTION}}
+site_url: https://azurelocal.github.io/{{REPO_NAME}}/
+repo_url: https://github.com/AzureLocal/{{REPO_NAME}}
+repo_name: AzureLocal/{{REPO_NAME}}
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.top
+    - content.code.copy
+    - search.suggest
+  icon:
+    repo: fontawesome/brands/github
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+
+copyright: >-
+  Copyright &copy; {{YEAR}} AzureLocal.

@@ -1,0 +1,45 @@
+site_name: {{REPO_NAME}}
+site_description: {{DESCRIPTION}}
+site_url: https://azurelocal.github.io/{{REPO_NAME}}/
+repo_url: https://github.com/AzureLocal/{{REPO_NAME}}
+repo_name: AzureLocal/{{REPO_NAME}}
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: blue
+      accent: blue
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.suggest
+    - toc.integrate
+  icon:
+    repo: fontawesome/brands/github
+
+nav:
+  - Home: index.md
+  - Modules:
+      - Module 1: modules/01-overview.md
+      - Module 2: modules/02-getting-started.md
+  - Labs:
+      - Lab 1: labs/01-setup.md
+  - Resources: resources.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+
+copyright: >-
+  Copyright &copy; {{YEAR}} AzureLocal.

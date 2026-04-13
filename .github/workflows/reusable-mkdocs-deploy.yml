@@ -1,0 +1,67 @@
+name: Reusable — MkDocs Deploy
+
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        description: Python version for the MkDocs build
+        type: string
+        default: '3.12'
+      pip-packages:
+        description: Space-separated pip packages to install (mkdocs-material is always included)
+        type: string
+        default: 'mkdocs-material'
+      strict:
+        description: Pass --strict to mkdocs build
+        type: boolean
+        default: true
+      fetch-depth:
+        description: git fetch depth — use 0 for full history (required by git-revision-date plugin)
+        type: number
+        default: 1
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: ${{ inputs.fetch-depth }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python-version }}
+
+      - name: Install MkDocs packages
+        run: pip install ${{ inputs.pip-packages }}
+
+      - name: Build site
+        env:
+          STRICT: ${{ inputs.strict }}
+        run: |
+          FLAGS=""
+          [ "$STRICT" = "true" ] && FLAGS="--strict"
+          mkdocs build $FLAGS
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

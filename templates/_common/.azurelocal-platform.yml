@@ -1,0 +1,13 @@
+# AzureLocal platform self-descriptor
+# Schema: https://AzureLocal.github.io/platform/reference/platform-metadata/
+
+platformVersion: 1
+repoType: {{REPO_TYPE}}
+
+adopts:
+  standards: true
+  reusableWorkflows: {{WORKFLOWS_ADOPTED}}
+  maproom: {{MAPROOM}}
+  trailhead: false
+
+lastAudited: {{AUDIT_DATE}}

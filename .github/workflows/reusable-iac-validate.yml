@@ -1,0 +1,92 @@
+name: Reusable — IaC Validate
+
+on:
+  workflow_call:
+    inputs:
+      run-bicep:
+        description: Run Bicep build + lint
+        type: boolean
+        default: true
+      run-terraform:
+        description: Run Terraform fmt + init + validate
+        type: boolean
+        default: true
+      bicep-path:
+        description: Directory containing .bicep files
+        type: string
+        default: 'src/bicep'
+      terraform-path:
+        description: Working directory for Terraform commands
+        type: string
+        default: 'src/terraform'
+      terraform-version:
+        description: Terraform version constraint
+        type: string
+        default: '~> 1.5'
+
+jobs:
+  bicep:
+    if: ${{ inputs.run-bicep }}
+    name: Bicep Build + Lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Bicep build (all .bicep files)
+        uses: azure/CLI@v2
+        env:
+          AZURE_CONFIG_DIR: /tmp/.azure
+        with:
+          inlineScript: |
+            az bicep version
+            failed=0
+            while IFS= read -r -d '' f; do
+              echo "Building $f..."
+              if ! az bicep build --file "$f" --stdout > /dev/null; then
+                echo "FAIL: $f"
+                failed=$((failed+1))
+              fi
+            done < <(find "${{ inputs.bicep-path }}" -name "*.bicep" -print0 2>/dev/null)
+            [ $failed -eq 0 ] || exit 1
+
+      - name: Bicep lint (all .bicep files)
+        uses: azure/CLI@v2
+        env:
+          AZURE_CONFIG_DIR: /tmp/.azure
+        with:
+          inlineScript: |
+            failed=0
+            while IFS= read -r -d '' f; do
+              echo "Linting $f..."
+              if ! az bicep lint --file "$f"; then
+                failed=$((failed+1))
+              fi
+            done < <(find "${{ inputs.bicep-path }}" -name "*.bicep" -print0 2>/dev/null)
+            [ $failed -eq 0 ] || exit 1
+
+  terraform:
+    if: ${{ inputs.run-terraform }}
+    name: Terraform Validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: ${{ inputs.terraform-path }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ inputs.terraform-version }}
+
+      - name: Terraform format check
+        run: terraform fmt -check -recursive
+
+      - name: Terraform init
+        run: terraform init -backend=false
+
+      - name: Terraform validate
+        run: terraform validate

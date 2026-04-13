@@ -1,0 +1,13 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    uses: AzureLocal/platform/.github/workflows/reusable-ts-web-ci.yml@main
+    with:
+      node-version: '20'

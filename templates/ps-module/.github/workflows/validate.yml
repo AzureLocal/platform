@@ -1,0 +1,32 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches-ignore:
+      - main
+  workflow_dispatch:
+
+jobs:
+  docs-build:
+    name: Docs build check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install mkdocs-material
+      - run: mkdocs build --strict
+
+  module-ci:
+    uses: AzureLocal/platform/.github/workflows/reusable-ps-module-ci.yml@main
+    with:
+      module-manifest: {{MODULE_NAME}}.psd1
+      run-psscriptanalyzer: true
+      psscriptanalyzer-path: src
+      run-pester: true
+      pester-test-path: tests/unit
+      validate-maproom: false
