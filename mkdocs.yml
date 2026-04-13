@@ -158,6 +158,7 @@ nav:
       - Integration model: maproom/integration-model.md
       - Extending the framework: maproom/extending-the-framework.md
       - Troubleshooting: maproom/troubleshooting.md
+      - Repo survey: testing/repo-survey.md
   - TRAILHEAD:
       - trailhead/index.md
       - Overview: trailhead/overview.md

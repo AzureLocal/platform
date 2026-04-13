@@ -1,7 +1,8 @@
 # ADR 0003 — MAPROOM framework & IIC canon centralization
 
-- **Status**: Proposed
+- **Status**: Accepted
 - **Date**: 2026-04-12
+- **Accepted**: 2026-04-13 (unblocked by ADR-0004)
 - **Deciders**: @kristopherjturner
 
 ## Context
