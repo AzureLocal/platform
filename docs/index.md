@@ -44,7 +44,7 @@ This is the documentation site for [`AzureLocal/platform`](https://github.com/Az
 
 === "Templates"
 
-    Five repo-type starter skeletons. [Template variants](templates/overview.md).
+    Five repo-type starter skeletons. [Template variants](scaffolds/overview.md).
 
 === "Repo management"
 

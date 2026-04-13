@@ -176,14 +176,14 @@ nav:
       - Common file sync: repo-management/common-file-sync.md
       - Emergency runbooks: repo-management/emergency-runbooks.md
   - Templates:
-      - templates/index.md
-      - Overview: templates/overview.md
-      - ps-module: templates/ps-module.md
-      - ts-web-app: templates/ts-web-app.md
-      - iac-solution: templates/iac-solution.md
-      - migration-runbook: templates/migration-runbook.md
-      - training-site: templates/training-site.md
-      - Authoring a new variant: templates/authoring-new-variant.md
+      - scaffolds/index.md
+      - Overview: scaffolds/overview.md
+      - ps-module: scaffolds/ps-module.md
+      - ts-web-app: scaffolds/ts-web-app.md
+      - iac-solution: scaffolds/iac-solution.md
+      - migration-runbook: scaffolds/migration-runbook.md
+      - training-site: scaffolds/training-site.md
+      - Authoring a new variant: scaffolds/authoring-new-variant.md
   - Modules:
       - modules/index.md
       - AzureLocal.Common: modules/AzureLocal.Common.md

@@ -77,7 +77,7 @@ Anyone listed in `CODEOWNERS` — currently just @kristopherjturner. Branch prot
 
 ## How do I extend a template variant?
 
-Edit the files under `templates/<variant>/`. Every new run of `New-AzureLocalRepo.ps1 -Type <variant>` will pick up the change. To add a whole new variant, see [templates/authoring-new-variant](../templates/authoring-new-variant.md).
+Edit the files under `templates/<variant>/`. Every new run of `New-AzureLocalRepo.ps1 -Type <variant>` will pick up the change. To add a whole new variant, see [scaffolds/authoring-new-variant](../scaffolds/authoring-new-variant.md).
 
 ## What if I find a security issue?
 

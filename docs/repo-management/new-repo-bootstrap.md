@@ -142,5 +142,5 @@ Always dry-run first.
 ## Related
 
 - [Onboarding → Create a new repo](../onboarding/create-new-repo.md) — user-facing guide
-- [Templates → Overview](../templates/overview.md) — variant comparison
+- [Templates → Overview](../scaffolds/overview.md) — variant comparison
 - [Reference → File manifest](../reference/file-manifest.md) — what files land in a new repo

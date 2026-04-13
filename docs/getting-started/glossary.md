@@ -54,7 +54,7 @@ See [`reusable-workflows/split-rule.md`](../reusable-workflows/split-rule.md).
 
 One of the five repo-type skeletons used to bootstrap new repos: `ps-module`, `ts-web-app`, `iac-solution`, `migration-runbook`, `training-site`. Cap is five for v1 — a sixth triggers an ADR.
 
-See [`templates/overview.md`](../templates/overview.md).
+See [`scaffolds/overview.md`](../scaffolds/overview.md).
 
 ## ADR
 

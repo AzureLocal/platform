@@ -63,7 +63,7 @@ Dry run prints the merged file tree, token substitutions, and the `gh repo creat
 | Host a migration playbook (e.g., source → Azure Local inventory cutover) | `migration-runbook` |
 | Be training / course material published as a static site | `training-site` |
 
-Reference: [Templates → Overview](../templates/overview.md) compares the variants in detail.
+Reference: [Templates → Overview](../scaffolds/overview.md) compares the variants in detail.
 
 ## Token substitution
 
@@ -118,6 +118,6 @@ Things you still do manually:
 
 ## Related
 
-- [Templates → Overview](../templates/overview.md) — what each variant contains
+- [Templates → Overview](../scaffolds/overview.md) — what each variant contains
 - [Repo management → New-repo bootstrap](../repo-management/new-repo-bootstrap.md) — the script internals
 - [Adopt from existing repo](adopt-from-existing-repo.md) — for repos that already exist
