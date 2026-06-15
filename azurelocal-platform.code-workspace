@@ -55,6 +55,13 @@
     {
       "name": "demo-repository",
       "path": "../demo-repository"
+    },
+    {
+      "path": "../azure-scout"
+    },
+    {
+      "name": "azurelocal-vm-hydration",
+      "path": "../azurelocal-vm-hydration"
     }
   ],
   "settings": {
@@ -106,7 +113,8 @@
       "https://squidfunk.github.io/mkdocs-material/schema.json": "mkdocs.yml"
     },
     "azureTerraform.checkTerraformCmd": false,
-    "git.openRepositoryInParentFolders": "always"
+    "git.openRepositoryInParentFolders": "always",
+    "claudeCode.environmentVariables": []
   },
   "extensions": {
     "recommendations": [
