@@ -39,3 +39,5 @@ temp/
 out/
 dist/
 *.log
+
+.claude/logs/
