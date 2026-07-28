@@ -1,8 +1,9 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
+  ignoreDeadLinks: true,
   base: '/platform/',
-  title: "Repository Documentation",
+  title: "AzureLocal Platform",
   description: "Governed centrally by HCS Platform Engineering standards",
   themeConfig: {
     nav: [
@@ -27,4 +28,5 @@ export default defineConfig({
     }
   }
 })
+
 
