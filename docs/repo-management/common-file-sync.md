@@ -14,10 +14,11 @@ title: Common file sync
 | `.editorconfig` | Editor formatting rules |
 | `.gitignore` | Common ignore patterns |
 
-!!! note "Files that are never auto-synced"
-    `CODEOWNERS` and `CHANGELOG.md` contain per-repo content and are intentionally
-    excluded. The script will never overwrite them automatically.
-
+> [!NOTE]
+> **Files that are never auto-synced**
+> `CODEOWNERS` and `CHANGELOG.md` contain per-repo content and are intentionally
+> excluded. The script will never overwrite them automatically.
+>
 ## Running locally
 
 The GitHub CLI (`gh`) and `git` must both be in `PATH`. `gh` must be authenticated.
@@ -59,6 +60,6 @@ When `-CreatePR` is passed, the script:
 
 The temporary clone is deleted automatically after the PR is created (or if an error occurs).
 
-!!! tip
-    Run without `-CreatePR` first to review what will change, then re-run with
-    `-CreatePR` to open the PRs once you are satisfied with the diff.
+> [!TIP]
+> Run without `-CreatePR` first to review what will change, then re-run with
+> `-CreatePR` to open the PRs once you are satisfied with the diff.

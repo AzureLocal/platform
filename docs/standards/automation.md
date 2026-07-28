@@ -40,9 +40,10 @@ flowchart TB
 | **PowerShell** | ✅ | ✅ | ✅ | ✅ |
 | **Ansible** | ✅ | ✅ | ✅ | ✅ |
 
-!!! warning "Delegates"
-    "Delegates" means the IaC tool provisions Azure resources but does not configure the guest OS or application layer. A separate tool (PowerShell or Ansible) handles guest configuration.
-
+> [!WARNING]
+> **Delegates**
+> "Delegates" means the IaC tool provisions Azure resources but does not configure the guest OS or application layer. A separate tool (PowerShell or Ansible) handles guest configuration.
+>
 ---
 
 ## Interoperability Rules

@@ -48,11 +48,11 @@ Run from the root of a full platform clone. The GitHub CLI (`gh`) must be authen
 | `-OutputPath` | string | — | Write the full report as a JSON file to this path |
 | `-FailOnDrift` | switch | — | Exit with code 1 if any repos have drift (useful in CI) |
 
-!!! note
-    The script requires the `AzureLocal.Common` module, which lives at
-    `modules/powershell/AzureLocal.Common/` in the platform repo. It is imported
-    automatically when the script is run from a full clone.
-
+> [!NOTE]
+> The script requires the `AzureLocal.Common` module, which lives at
+> `modules/powershell/AzureLocal.Common/` in the platform repo. It is imported
+> automatically when the script is run from a full clone.
+>
 ## Automated schedule
 
 `drift-audit.yml` runs `Invoke-RepoAudit.ps1` on a monthly schedule (09:00 UTC on the 1st of every month) and on `workflow_dispatch`. When drift is found it files a GitHub Issue on the platform repo with the label `drift-report`. The full JSON report is uploaded as a workflow artifact and retained for 90 days.
@@ -72,6 +72,6 @@ Permissions: contents: read, issues: write
 ./repo-management/org-scripts/Invoke-RepoAudit.ps1 -Org AzureLocal -FailOnDrift
 ```
 
-!!! tip
-    If you need to suppress a false positive, add the relevant exemption to the
-    repo's `.azurelocal-platform.yml` descriptor rather than disabling the check globally.
+> [!TIP]
+> If you need to suppress a false positive, add the relevant exemption to the
+> repo's `.azurelocal-platform.yml` descriptor rather than disabling the check globally.

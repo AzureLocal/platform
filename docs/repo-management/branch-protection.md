@@ -49,7 +49,8 @@ The GitHub CLI (`gh`) must be authenticated with `admin:org` scope or repo-admin
 | `-Repos` | string[] | all non-archived repos | Explicit list of repo names to target |
 | `-DryRun` | switch | — | Print planned changes without making any API calls |
 
-!!! tip "Restoring protection after an incident"
-    If branch protection is accidentally removed from one or more repos, run
-    `Sync-BranchProtection.ps1` without arguments to restore canonical settings across
-    the entire org in a single pass. See also [Emergency runbooks](emergency-runbooks.md).
+> [!TIP]
+> **Restoring protection after an incident**
+> If branch protection is accidentally removed from one or more repos, run
+> `Sync-BranchProtection.ps1` without arguments to restore canonical settings across
+> the entire org in a single pass. See also [Emergency runbooks](emergency-runbooks.md).

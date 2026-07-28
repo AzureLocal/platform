@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
+  base: '/platform/',
   title: "Repository Documentation",
   description: "Governed centrally by HCS Platform Engineering standards",
   themeConfig: {
@@ -26,3 +27,4 @@ export default defineConfig({
     }
   }
 })
+

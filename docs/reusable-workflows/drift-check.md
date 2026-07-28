@@ -51,7 +51,7 @@ jobs:
 | On failure | Consumer workflow fails | Issues filed on the platform repo |
 | Action required by | Consumer repo maintainer | Org maintainer (@kristopherjturner) |
 
-!!! note
-    `reusable-drift-check` is a lightweight file-existence check. The org-wide
-    [`drift-audit`](../repo-management/drift-audit.md) is the authoritative audit that
-    checks workflow patterns and `.azurelocal-platform.yml` content in depth.
+> [!NOTE]
+> `reusable-drift-check` is a lightweight file-existence check. The org-wide
+> [`drift-audit`](../repo-management/drift-audit.md) is the authoritative audit that
+> checks workflow patterns and `.azurelocal-platform.yml` content in depth.

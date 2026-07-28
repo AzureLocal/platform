@@ -7,10 +7,11 @@ title: TRAILHEAD safety checklist
 TRAILHEAD runs against live clusters. Mistakes can disrupt workloads, corrupt storage,
 or trigger unexpected failovers. Run through this checklist before **every** cycle.
 
-!!! danger "Never skip this checklist"
-    The checklist exists because past incidents happened without it. A 3-minute review
-    prevents hours of recovery work.
-
+> [!CAUTION]
+> **Never skip this checklist**
+> The checklist exists because past incidents happened without it. A 3-minute review
+> prevents hours of recovery work.
+>
 ## Pre-run checklist
 
 ### Cluster state

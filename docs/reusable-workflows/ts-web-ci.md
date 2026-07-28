@@ -68,7 +68,8 @@ jobs:
       test-script: test:unit
 ```
 
-!!! note "Script names must exist in package.json"
-    The workflow runs `npm run <script>` verbatim. Ensure `typecheck`, `lint`, and your
-    chosen `test-script` are defined in your `package.json` before enabling those steps.
-    Disable any step that has no corresponding script rather than leaving it enabled.
+> [!NOTE]
+> **Script names must exist in package.json**
+> The workflow runs `npm run <script>` verbatim. Ensure `typecheck`, `lint`, and your
+> chosen `test-script` are defined in your `package.json` before enabling those steps.
+> Disable any step that has no corresponding script rather than leaving it enabled.

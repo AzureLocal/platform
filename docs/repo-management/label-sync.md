@@ -59,6 +59,7 @@ The GitHub CLI (`gh`) must be authenticated with `org:write` scope (or equivalen
 - Labels present in a repo that are absent from `labels.json` are intentionally preserved. Run with `-DryRun` to see the full state of a repo's labels without making changes.
 - The script reports a count of synced, skipped, and errored labels at the end of each run.
 
-!!! warning "Scope requirement"
-    Creating or editing labels via the GitHub API requires write access to each target
-    repository. Ensure `gh auth status` shows the correct org and scopes before running.
+> [!WARNING]
+> **Scope requirement**
+> Creating or editing labels via the GitHub API requires write access to each target
+> repository. Ensure `gh auth status` shows the correct org and scopes before running.

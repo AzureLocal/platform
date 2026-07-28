@@ -55,7 +55,8 @@ jobs:
 | MAPROOM validation runs on its own schedule or trigger (e.g. weekly, or only on fixture file changes) | This workflow (`reusable-maproom-run`) |
 | You want to pin fixture validation to a specific platform schema version during a migration | This workflow, with `platform-ref` set to a tag or SHA |
 
-!!! tip "Pinning the platform ref"
-    During a platform schema migration, set `platform-ref` to the previous release tag
-    (e.g. `v0.0.1`) to keep fixture validation passing while you update your fixtures to
-    the new schema. Switch back to `main` once all fixtures are updated.
+> [!TIP]
+> **Pinning the platform ref**
+> During a platform schema migration, set `platform-ref` to the previous release tag
+> (e.g. `v0.0.1`) to keep fixture validation passing while you update your fixtures to
+> the new schema. Switch back to `main` once all fixtures are updated.

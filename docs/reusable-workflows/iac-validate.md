@@ -96,6 +96,6 @@ jobs:
       terraform-path: infra/terraform
 ```
 
-!!! note
-    The Bicep and Terraform jobs run in parallel. A failure in one does not cancel the
-    other, so you get full feedback from both toolchains in a single run.
+> [!NOTE]
+> The Bicep and Terraform jobs run in parallel. A failure in one does not cancel the
+> other, so you get full feedback from both toolchains in a single run.

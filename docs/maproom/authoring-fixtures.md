@@ -26,10 +26,11 @@ Every fixture — regardless of `infrastructure_type` — must have these fields
 }
 ```
 
-!!! note "Reserved sections"
-    `compliance`, `performance`, `user_journey`, and `iac` must be present as
-    empty objects in v0.2.0. They will be populated by deferred toolsets in v0.3.0.
-
+> [!NOTE]
+> **Reserved sections**
+> `compliance`, `performance`, `user_journey`, and `iac` must be present as
+> empty objects in v0.2.0. They will be populated by deferred toolsets in v0.3.0.
+>
 ## `azure_local` fixture shape
 
 For S2D cluster fixtures (`infrastructure_type: "azure_local"`), the schema also

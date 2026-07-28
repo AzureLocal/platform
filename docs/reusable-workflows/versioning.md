@@ -26,11 +26,12 @@ uses: AzureLocal/platform/.github/workflows/reusable-mkdocs-deploy.yml@v1
 uses: AzureLocal/platform/.github/workflows/reusable-mkdocs-deploy.yml@main
 ```
 
-!!! note "Current state — v0.x.x"
-    While the platform is still in v0.x.x (pre-stable), consumers reference `@main`.
-    The `@v1` pin rule takes effect when the platform tags v1.0.0. Until then, `@main`
-    is acceptable and drift-check is configured accordingly.
-
+> [!NOTE]
+> **Current state — v0.x.x**
+> While the platform is still in v0.x.x (pre-stable), consumers reference `@main`.
+> The `@v1` pin rule takes effect when the platform tags v1.0.0. Until then, `@main`
+> is acceptable and drift-check is configured accordingly.
+>
 ## Breaking vs non-breaking changes
 
 | Change | SemVer bump | Example |

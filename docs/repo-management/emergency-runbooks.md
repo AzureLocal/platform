@@ -6,10 +6,11 @@ title: Emergency runbooks
 
 These runbooks cover scenarios where something in the platform itself has broken and consumer repos are affected. All platform operations are managed by @kristopherjturner as the sole org maintainer.
 
-!!! warning "Read before acting"
-    Each runbook changes live org settings or workflow behaviour. Confirm you understand
-    the scope of impact before running any command.
-
+> [!WARNING]
+> **Read before acting**
+> Each runbook changes live org settings or workflow behaviour. Confirm you understand
+> the scope of impact before running any command.
+>
 ---
 
 ## Revert a broken reusable workflow
@@ -110,11 +111,12 @@ The script reports `PASS` or `FAIL` per repo. Any `FAIL` indicates an API error 
 2. Re-run whatever script or import was failing to confirm it works on the pinned version.
 3. Once a fix is merged to `main` on the platform, update the consumer to use `main` again.
 
-!!! note "Semantic versioning"
-    The platform uses release-please for versioning. Check the `CHANGELOG.md` for the
-    version that introduced the breaking change and use the preceding version tag as your
-    pin target.
-
+> [!NOTE]
+> **Semantic versioning**
+> The platform uses release-please for versioning. Check the `CHANGELOG.md` for the
+> version that introduced the breaking change and use the preceding version tag as your
+> pin target.
+>
 ---
 
 ## Contact / escalation

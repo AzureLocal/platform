@@ -80,8 +80,9 @@ jobs:
       maproom-fixture-path: tests/maproom/Fixtures
 ```
 
-!!! tip "MAPROOM vs standalone maproom-run"
-    The `maproom` job embedded here is suitable when fixture validation is part of the
-    same CI run as the module build. Use [`reusable-maproom-run`](maproom-run.md) as a
-    standalone workflow when you want MAPROOM validation to run on its own schedule or
-    trigger independently of module CI.
+> [!TIP]
+> **MAPROOM vs standalone maproom-run**
+> The `maproom` job embedded here is suitable when fixture validation is part of the
+> same CI run as the module build. Use [`reusable-maproom-run`](maproom-run.md) as a
+> standalone workflow when you want MAPROOM validation to run on its own schedule or
+> trigger independently of module CI.
